@@ -1,17 +1,13 @@
 import os
 import re
-import pandas as pd # This is a module that must be downloaded and added to the project's PATH.
 
-# Regular Expressions:
+# Regular Expressions (Scratchwork):
 # Enumerator: "\d(\d*). "
 # State and Zip: "CA \d\d\d\d\d"
 # Street Number and Street: "(\d\d*)(.*)(Street|street|STREET|St|st|Avenue|avenue|Ave|ave)"
 
-# This would display all the raw contents of the file:
-#with open(fileName, 'r') as file:
-#    file_contents = file.read()
-#    print(file_contents)
 
+# All of our desired regular expression statements are defined here.
 rx_dict = {
     'enumerator': re.compile(r'(?P<enumerator>\d(\d*)\. )'),
     'stateANDzip': re.compile(r'(?P<stateANDzip>CA \d\d\d\d\d)'),
@@ -36,6 +32,7 @@ rx_dict = {
     'spacedText': re.compile(r'(?P<spacedText>( )(.*))')
 }
 
+# Assess whether any of the contents of "line" match a regular expression defined in rx_dict.
 def _parse_line(line):
     """
     Do a regex search against all defined regexes and
@@ -50,6 +47,7 @@ def _parse_line(line):
     # if there are no matches
     return None, None
 
+# Assess whether any of the contents of "line" match a specific regular expression defined in rx_dict.
 def _parse_line_specific(line, key):
     for tempKey, rx in rx_dict.items():
         if tempKey == key:
@@ -66,6 +64,7 @@ def _parse_line_specific(line, key):
 
 entrySet = set()
 
+# Function to handle the parsing of all the raw text files for LoopNet/CoStar data.
 def parse_files(filepath):
     # Names of raw text files with LoopNet/CoStar Data.
     textFiles = ['2M-2.05M CoStar 2-15.txt',
@@ -137,6 +136,7 @@ def parse_files(filepath):
                     print('Listing Number: ', addressCount, '\t', 'Name of File: ', specificFile, '\tLine of file: ', i, '\tFound matches: ', tempCount, '\n')
         file_object.close()
 
+# Function to write all parsed data to an output file.
 def writeToOutput(filename_out):
     f = open(filename_out, "w")  # Normal naming convention for a file writer: f
     headers = "Street Number, Street Name, Zipcode\n"
@@ -145,6 +145,7 @@ def writeToOutput(filename_out):
         f.write(entry)
     f.close()
 
+# Main function to call all functions.
 def main():
     print('In the main...Running parseFile\n')
     # OS Path to raw text files with LoopNet/CoStar Data.
