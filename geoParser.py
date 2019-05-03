@@ -17,6 +17,7 @@ def main():
     state = []                                                          # "      "      "   "    states store
     zipcode = []                                                        # "      "      "   "    zipcodes store
     status = []
+    caseType = []
 
     j = 2                                                               # initial number fot he column that we are retriving the data from
 
@@ -34,12 +35,19 @@ def main():
         state.append(str(sheet.cell_value(i,j + 3)))
         zipcode.append(str(sheet.cell_value(i, j + 4)))
         status.append(str(sheet.cell_value(i, j + 9)))
+        caseType.append(str(sheet.cell_value(i, j + 8)))
 
 
     # getting rid of any space in front and at the end
     spaceStrip(streetNumber)
     spaceStrip(zipcode)
     spaceStrip(streetName)
+    spaceStrip(caseType)
+
+    #gettign index from case type
+    makeListCap(caseType)
+    militarySiteRemove(streetName, streetNumber, zipcode, caseType, 'MILITARY')
+
 
     # things that need to be remove from street names
     thingToRemove('0', streetName)
@@ -90,7 +98,7 @@ def main():
 
     writeToCVS (streetName, streetNumber, zipcode)
 
-    #printFunct(streetName)
+    printFunct(caseType)
     #print(len(streetName))
     #print(len(streetNumber))
     #print(len(zipcode))
@@ -145,15 +153,8 @@ def formatStreetNum(street, name, zipcode, operator):
                 temp = street[i].split(operator)
 
 
-                if ('bldg' in temp[0]) or ('BLDG' in temp[0]) or ('Bldg' in temp [0]) or ('Wells' in temp[0]) \
-                        or ('Building' in temp[0]):
-                    temp = bldgAndWellsRepitor(temp)
-                    for j in range(len(temp)):
-                        street.append(temp[j])      # appending all the elments needed at the end of the list
-                        name.append(name[i])        # with the appropiate street name
-                        zipcode.append(zipcode[i])  # and zipcode
-                else :
-                    for j in range(len(temp)):
+
+                for j in range(len(temp)):
                         street.append(temp[j])      # appending all the elments needed at the end of the list
                         name.append(name[i])        # with the appropiate street name
                         zipcode.append(zipcode[i])  # and zipcode
@@ -162,7 +163,27 @@ def formatStreetNum(street, name, zipcode, operator):
                 name.pop(i)                         # with the appropiate street name
                 zipcode.pop(i)                      # and zipcode
 
+#deletes military site from the list
+def militarySiteRemove(street, number, zipcode, casetype, notwanted ):
+    indexToDelete = []
+    indexToDelete = searchIndex(notwanted, casetype)
 
+    for i in range(len(indexToDelete)):
+        street.pop(indexToDelete[i] - i)
+        number.pop(indexToDelete[i] - i)
+        zipcode.pop(indexToDelete[i] - i)
+        casetype.pop(indexToDelete[i] - i)
+
+
+
+def searchIndex(notWanted, caseType):
+
+    indexe = []
+    for i in range(len(caseType)):
+        if notWanted in caseType[i]:
+            indexe.append(i)
+
+    return indexe
 
 # amplifies the list by adding the numbers in between
 def removingDash (street, name, zipcode, operator):
@@ -176,9 +197,7 @@ def removingDash (street, name, zipcode, operator):
 
                 temp = street[i].split(operator)
 
-                if ('bldg' in temp[0]) or ('BLDG' in temp[0]) or ('Bldg' in temp[0]) or ('Building' in temp[0]):
-                    temp = bldgDealer(temp)
-                    flagForBldg = 1
+
 
                 if (intOrNo(temp[0])) and (intOrNo(temp[1])):
                         first = int(temp[0])
@@ -188,13 +207,6 @@ def removingDash (street, name, zipcode, operator):
                             count = second - first + 1
                             for t in range(count):      # adding all the number in between to the list
 
-                                if flagForBldg == 1:
-                                    strinTemp = 'BLDG ' + str(first)    # adds the BLDG tot he string for the new entry
-                                    street.append(strinTemp)            # atach it to the back
-                                    name.append(name[i])
-                                    zipcode.append(zipcode[i])
-                                    first += 1
-                                else:
                                     street.append(str(first))
                                     first += 1
                                     name.append(name[i])    # with the appropiate street name and zipcode
@@ -203,14 +215,6 @@ def removingDash (street, name, zipcode, operator):
                             count = first - second + 1
                             for t in range(count):      # adding all the number in between to the list
 
-                                if flagForBldg == 1:
-                                    strinTemp = 'BLDG ' + str(second)   # adds the BLDG tot he string for the new entry
-                                    street.append(strinTemp)            # atach it to the back
-                                    name.append(name[i])
-                                    zipcode.append(zipcode[i])
-                                    second += 1
-
-                                else:
                                     street.append(str(second))
                                     second += 1
                                     name.append(name[i])    # with the appropiate street name and zipcode
@@ -223,29 +227,8 @@ def removingDash (street, name, zipcode, operator):
 
 
 
-def bldgDealer(street):  # justr dividing the intial string a bbhit more so i can get the number by it slef and add the
-                         # bldg later
-    temp = street[0].strip()
-    street[0] = temp[1]
 
 
-    return street
-
-# adds bldg, wells or building to all the street numbers that are divided by , & and or ;
-def bldgAndWellsRepitor (street):
-
-
-    if ('bldg' in street[0]) or ('BLDG' in street[0]) or ('Bldg' in street[0]):
-        for i in range(1 ,len(street)):
-            street[i] = 'BLDG' + street[i]
-    elif ('Wells' in street[0]):
-        for i in range(1, len(street)):
-            street[i] = 'Wells' + street[i]
-    else:
-        for i in range(1, len(street)):
-            street[i] = 'Building' + street[i]
-
-    return  street
 
 
 
