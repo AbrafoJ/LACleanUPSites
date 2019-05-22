@@ -1,0 +1,45 @@
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] MongoDB starting : pid=17792 port=27017 dbpath=/data/db 64-bit host=ip-172-31-18-151
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] db version v3.6.3
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] git version: 9586e557d54ef70f9ca4b43c26892cd55257e1a5
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0g  2 Nov 2017
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] modules: none
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] build environment:
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-04-18T22:47:32.426+0000 I CONTROL  [initandlisten] options: { processManagement: { fork: true }, systemLog: { destination: "file", path: "/home/ubuntu/databaseTest/log/mongodb.log" } }
+2019-04-18T22:47:32.426+0000 I -        [initandlisten] Detected data files in /data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2019-04-18T22:47:32.426+0000 I STORAGE  [initandlisten] 
+2019-04-18T22:47:32.426+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-04-18T22:47:32.426+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-04-18T22:47:32.426+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=256M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2019-04-18T22:47:33.242+0000 I STORAGE  [initandlisten] WiredTiger message [1555627653:242404][17792:0x7f85b1a40f80], txn-recover: Main recovery loop: starting at 16/214656
+2019-04-18T22:47:33.331+0000 I STORAGE  [initandlisten] WiredTiger message [1555627653:331523][17792:0x7f85b1a40f80], txn-recover: Recovering log 16 through 17
+2019-04-18T22:47:33.384+0000 I STORAGE  [initandlisten] WiredTiger message [1555627653:384467][17792:0x7f85b1a40f80], txn-recover: Recovering log 17 through 17
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] 
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] 
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2019-04-18T22:47:33.524+0000 I CONTROL  [initandlisten] 
+2019-04-18T22:47:33.547+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+2019-04-18T22:47:33.547+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2019-04-18T23:05:40.272+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42668 #1 (1 connection now open)
+2019-04-18T23:05:40.277+0000 I NETWORK  [conn1] received client metadata from 127.0.0.1:42668 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T23:05:40.303+0000 I NETWORK  [conn1] end connection 127.0.0.1:42668 (0 connections now open)
+2019-04-18T23:06:14.497+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42672 #2 (1 connection now open)
+2019-04-18T23:06:14.502+0000 I NETWORK  [conn2] received client metadata from 127.0.0.1:42672 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T23:06:14.529+0000 I NETWORK  [conn2] end connection 127.0.0.1:42672 (0 connections now open)
+2019-04-19T00:27:15.908+0000 I CONTROL  [signalProcessingThread] got signal 15 (Terminated), will terminate after current cmd ends
+2019-04-19T00:27:15.908+0000 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2019-04-19T00:27:15.908+0000 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2019-04-19T00:27:15.909+0000 I FTDC     [signalProcessingThread] Shutting down full-time diagnostic data capture
+2019-04-19T00:27:15.911+0000 I STORAGE  [signalProcessingThread] WiredTigerKVEngine shutting down
+2019-04-19T00:27:15.995+0000 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2019-04-19T00:27:15.995+0000 I CONTROL  [signalProcessingThread] now exiting
+2019-04-19T00:27:15.995+0000 I CONTROL  [signalProcessingThread] shutting down with code:0

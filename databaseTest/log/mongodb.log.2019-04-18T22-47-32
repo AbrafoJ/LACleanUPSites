@@ -1,0 +1,74 @@
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] MongoDB starting : pid=4870 port=27017 dbpath=/data/db 64-bit host=ip-172-31-18-151
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] db version v3.6.3
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] git version: 9586e557d54ef70f9ca4b43c26892cd55257e1a5
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0g  2 Nov 2017
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] modules: none
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] build environment:
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-04-17T21:09:04.862+0000 I CONTROL  [initandlisten] options: { processManagement: { fork: true }, systemLog: { destination: "file", path: "/home/ubuntu/databaseTest/log/mongodb.log" } }
+2019-04-17T21:09:04.862+0000 I -        [initandlisten] Detected data files in /data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2019-04-17T21:09:04.862+0000 I STORAGE  [initandlisten] 
+2019-04-17T21:09:04.862+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-04-17T21:09:04.862+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-04-17T21:09:04.862+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=256M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2019-04-17T21:09:05.709+0000 I STORAGE  [initandlisten] WiredTiger message [1555535345:709391][4870:0x7f92e0520f80], txn-recover: Main recovery loop: starting at 15/22528
+2019-04-17T21:09:05.798+0000 I STORAGE  [initandlisten] WiredTiger message [1555535345:798466][4870:0x7f92e0520f80], txn-recover: Recovering log 15 through 16
+2019-04-17T21:09:05.852+0000 I STORAGE  [initandlisten] WiredTiger message [1555535345:852561][4870:0x7f92e0520f80], txn-recover: Recovering log 16 through 16
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] 
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] 
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2019-04-17T21:09:05.981+0000 I CONTROL  [initandlisten] 
+2019-04-17T21:09:05.998+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+2019-04-17T21:09:05.999+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2019-04-17T21:09:07.659+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42530 #1 (1 connection now open)
+2019-04-17T21:09:07.660+0000 I NETWORK  [conn1] received client metadata from 127.0.0.1:42530 conn: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.6.3" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-04-17T21:09:59.034+0000 I STORAGE  [conn1] createCollection: Students.Students with generated UUID: e0975d68-0da8-484d-a870-39cb88cec7ee
+2019-04-17T23:21:22.669+0000 I NETWORK  [conn1] end connection 127.0.0.1:42530 (0 connections now open)
+2019-04-18T21:04:55.483+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42612 #2 (1 connection now open)
+2019-04-18T21:04:55.490+0000 I NETWORK  [conn2] received client metadata from 127.0.0.1:42612 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T21:04:55.496+0000 I NETWORK  [conn2] end connection 127.0.0.1:42612 (0 connections now open)
+2019-04-18T21:06:18.740+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42616 #3 (1 connection now open)
+2019-04-18T21:06:18.745+0000 I NETWORK  [conn3] received client metadata from 127.0.0.1:42616 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T21:06:18.763+0000 I STORAGE  [conn3] createCollection: KnownSites.sites with generated UUID: 8688432b-4eb1-42e3-8309-1f2f54628edd
+2019-04-18T21:06:18.811+0000 I NETWORK  [conn3] end connection 127.0.0.1:42616 (0 connections now open)
+2019-04-18T21:14:50.014+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42620 #4 (1 connection now open)
+2019-04-18T21:14:50.018+0000 I NETWORK  [conn4] received client metadata from 127.0.0.1:42620 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T21:14:50.028+0000 I NETWORK  [conn4] end connection 127.0.0.1:42620 (0 connections now open)
+2019-04-18T21:15:22.786+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42624 #5 (1 connection now open)
+2019-04-18T21:15:22.791+0000 I NETWORK  [conn5] received client metadata from 127.0.0.1:42624 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T21:15:22.813+0000 I NETWORK  [conn5] end connection 127.0.0.1:42624 (0 connections now open)
+2019-04-18T21:17:40.472+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42628 #6 (1 connection now open)
+2019-04-18T21:17:40.477+0000 I NETWORK  [conn6] received client metadata from 127.0.0.1:42628 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T21:17:40.503+0000 I NETWORK  [conn6] end connection 127.0.0.1:42628 (0 connections now open)
+2019-04-18T22:28:53.105+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42638 #7 (1 connection now open)
+2019-04-18T22:28:53.110+0000 I NETWORK  [conn7] received client metadata from 127.0.0.1:42638 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T22:28:53.132+0000 I NETWORK  [conn7] end connection 127.0.0.1:42638 (0 connections now open)
+2019-04-18T22:30:16.972+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42642 #8 (1 connection now open)
+2019-04-18T22:30:16.976+0000 I NETWORK  [conn8] received client metadata from 127.0.0.1:42642 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T22:30:17.003+0000 I NETWORK  [conn8] end connection 127.0.0.1:42642 (0 connections now open)
+2019-04-18T22:40:01.147+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42648 #9 (1 connection now open)
+2019-04-18T22:40:01.151+0000 I NETWORK  [conn9] received client metadata from 127.0.0.1:42648 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T22:40:01.174+0000 I NETWORK  [conn9] end connection 127.0.0.1:42648 (0 connections now open)
+2019-04-18T22:40:15.478+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42652 #10 (1 connection now open)
+2019-04-18T22:40:15.483+0000 I NETWORK  [conn10] received client metadata from 127.0.0.1:42652 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T22:40:15.508+0000 I NETWORK  [conn10] end connection 127.0.0.1:42652 (0 connections now open)
+2019-04-18T22:41:06.688+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:42656 #11 (1 connection now open)
+2019-04-18T22:41:06.692+0000 I NETWORK  [conn11] received client metadata from 127.0.0.1:42656 conn: { driver: { name: "nodejs", version: "3.2.2" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.15.0-1034-aws" }, platform: "Node.js v11.12.0, LE, mongodb-core: 3.2.2" }
+2019-04-18T22:41:06.714+0000 I NETWORK  [conn11] end connection 127.0.0.1:42656 (0 connections now open)
+2019-04-18T22:41:34.866+0000 I CONTROL  [signalProcessingThread] got signal 15 (Terminated), will terminate after current cmd ends
+2019-04-18T22:41:34.866+0000 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2019-04-18T22:41:34.866+0000 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2019-04-18T22:41:34.866+0000 I FTDC     [signalProcessingThread] Shutting down full-time diagnostic data capture
+2019-04-18T22:41:34.868+0000 I STORAGE  [signalProcessingThread] WiredTigerKVEngine shutting down
+2019-04-18T22:41:34.995+0000 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2019-04-18T22:41:34.995+0000 I CONTROL  [signalProcessingThread] now exiting
+2019-04-18T22:41:34.995+0000 I CONTROL  [signalProcessingThread] shutting down with code:0

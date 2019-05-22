@@ -1,0 +1,10 @@
+var x,y,z;
+x = 5; y = 6;
+z = x+ y;
+a = 2.5;
+b = 2.5 * 2;
+console.log(x,y,z);
+console.log(b,' is twice', a);
+word = 'This is a lowercase word variable\n';
+Word = 'This is an uppcase word variable';
+console.log(word, Word);
