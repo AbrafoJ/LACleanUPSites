@@ -1,0 +1,47 @@
+<mat-toolbar color="accent" class="navbar">
+	<div>
+		<img src="assets/img/Logo.png" width="75" height="50" align="middle" alt="logo">
+		LA Clean Up Sites
+	</div>
+	<div>
+		<span>
+			<button color="500" mat-raised-button>Home</button>
+		</span>
+		<span>
+			<button color="700" mat-raised-button>About</button>
+		</span>
+	</div>
+<div>
+<mat-form-field>
+	<input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter">
+</mat-form-field>
+</div>
+</mat-toolbar>
+<div class="mat-elevation-z8">
+<mat-table [dataSource]="dataSource" matSort>
+  <!-- Position Column -->
+  <ng-container matColumnDef="streetnumber">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Street Number </mat-header-cell>
+    <mat-cell *matCellDef="let site"> {{site.streetnumber}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="streetname">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Street Name </mat-header-cell>
+    <mat-cell *matCellDef="let site"> {{site.streetname}} </mat-cell>
+  </ng-container>
+
+  <!-- Zip Code Column -->
+  <ng-container matColumnDef="zipcode">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Zip Code</mat-header-cell>
+    <mat-cell *matCellDef="let site"> {{site.zipcode}} </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+	
+</mat-paginator>
+</div>
