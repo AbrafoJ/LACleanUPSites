@@ -2,19 +2,51 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const url = 'https://www.loopnet.com/for-sale/los-angeles-ca/?sk=f35e8fea23610eb8e75b824b755e367a&e=u'
+const url = 'https://www.loopnet.com/for-sale/los-angeles-ca/1/'
 
 var listing_ids = [];
 
+main(url);
+
 //===========================================================================
-// axios.get() makes the first http request to loopnet 
-// "initial" scraping gets all the listing IDs 
-// and pushes it into a list (listing_ids)
+// func main(): this gets all the 25 raw links from loopnet's 'main' page
+// passes all 25 into getDataFromPinProfile
 //
-// input(s): url of website we want to scrape from
+// input(s): url to the main loopnet page
 // output(s): -
 //===========================================================================
-axios.get(url)
+async function main(url){
+  axios.get(url)
+    .then(response => {
+      const $ = cheerio.load(response.data)
+
+      for( i=1; i<=10; i++){
+        var s = 'https://www.loopnet.com/for-sale/los-angeles-ca/'+i+'/'
+        console.log(s);
+        getDataFromPinProfile(s);
+      }
+      // $('ol li').each(function () {
+      //   const href = $(this).children().attr('href');
+      //   //console.log($(this).children().attr('href'));
+      //   if (href !== undefined){
+      //     //getDataFromPinProfile(href);
+      //     console.log('link: ',href);
+      //   }
+      // })
+      //console.log(listing_ids);
+    })
+    .catch(console.error);
+}
+
+//===========================================================================
+// func getData(): "initial" scraping round
+// this function calls getListings()
+//
+// input(s): raw url
+// output(s): -
+//===========================================================================
+async function getDataFromPinProfile(url){
+  axios.get(url)
   .then(response => {
     //const html = response.data;
     const $ = cheerio.load(response.data)
@@ -32,26 +64,28 @@ axios.get(url)
         listing_ids.push(s);
       }
     })
-    console.log(listing_ids);
+    //console.log(listing_ids);
 
     // pass IDs for actual scraping of addresses
     for(i=0; i<listing_ids.length; i++){
-      getData(listing_ids[i]);
+      getListings(listing_ids[i]);
     }
   })
   .catch(console.error);
+}
+
 
 //===========================================================================
-// func getData(): "second" scraping round
+// func getListings(): "second" scraping round
 //
 // input(s): url + appended ID from initial scrape
 // output(s): -
 //===========================================================================
-async function getData(url){
+async function getListings(url){
   //const url2 = listing_ids[1];
   axios.get(url)
     .then(response => {
-        console.log(url);
+        //console.log(url);
         const html = response.data;
         const $ = cheerio.load(html)
         const listing_info = $('body').children().text();
@@ -59,38 +93,3 @@ async function getData(url){
     })
     .catch(console.error);
 }
-
-
-
-
-      // axios(url)
-      // .then(response => {
-
-      //   //======================SCRAPE 1=========================
-      //   const html = response.data;
-      //   const $ = cheerio.load(html)
-      //   //const ul = $('ul li');
-      //   //console.log(ul);
-      //   //const ul = 
-      //   //const listing_ids = [];
-      //   //$('body').children().text();
-      //   console.log($('body').children().text());
-
-      // })
-      // .catch(console.error);
-
-
-    // axios.all( [
-    //   axios.get(listing_ids[0]),
-    //   axios.get(listing_ids[1]),
-    //   axios.get(listing_ids[2]),
-    //   axios.get(listing_ids[3]),
-    //   axios.get(listing_ids[4]),
-    //   axios.get(listing_ids[5]),
-    //   axios.get(listing_ids[6]),
-    //   axios.get(listing_ids[7]),
-    //   axios.get(listing_ids[8]),
-    //   axios.get(listing_ids[9]),
-    //   axios.get(listing_ids[10])
-    //   ]
-    // )
