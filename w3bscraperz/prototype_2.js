@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 #!/home/ubuntu/.nvm/versions/node/v11.12.0/bin/node
 
-const fs = require('fs'); // ADDED THIS LINE: fs stands for filesystem, allows writing the data to a text file.
-=======
 const fs = require('fs'); // Allows writing the data to a text file.
->>>>>>> 0ebb5922656148b7f1110819d9e26d4c2a0a71e8
 const axios = require('axios');
 const cheerio = require('cheerio');
 
