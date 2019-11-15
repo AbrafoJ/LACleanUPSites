@@ -1,3 +1,5 @@
+#!/home/ubuntu/.nvm/versions/node/v11.12.0/bin/node
+
 const fs = require('fs'); // ADDED THIS LINE: fs stands for filesystem, allows writing the data to a text file.
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -96,7 +98,7 @@ async function getListings(url){
           "\n<START_LISTING_INFO>\n" + listing_info + "\n<END_LISTING_INFO>" + // ADDED THIS LINE: The actual listing info, including address.
           "\n<END_LOOSE_ID>" + listing_count + "<LOOSE_ID>" + // ADDED THIS LINE
           "\n<DELIMINATION_TAG>"; // ADDED THIS LINE: Serves as a deliminator in the .txt file when read into Python.
-        fs.appendFile('scrape_output.txt', textFileData, (err) => { // ADDED THIS LINE
+        fs.appendFile('1scrape_output.txt', textFileData, (err) => { // ADDED THIS LINE
           if (err) throw err; // ADDED THIS LINE: Throw error if necessary.
         }); // ADDED THIS LINE
         console.log(listing_info);
