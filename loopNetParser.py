@@ -149,7 +149,7 @@ def writeToOutput(filename_out):
 def main():
     print('In the main...Running parseFile\n')
     # OS Path to raw text files with LoopNet/CoStar Data.
-    filePath = '/Users/joseph-vaiz-gomez/Documents/CSULB Documents/Semesters/Spring 2019/CECS 491A/Data/LoopNet/Cost Filtered Listings'
+    filePath = '/Users/Otter/Desktop/LACleanup/LACleanUPSites/Raw_Data/LoopNet'
     parse_files(filePath)
     print('parseFile completed!\n')
     outputFileName = "loopNetAddresses.csv"

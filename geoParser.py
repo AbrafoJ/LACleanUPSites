@@ -3,7 +3,7 @@ import xlrd
 from collections import deque
 
 #file is on folder so no need of path
-filePath = 'C:/Users/diego/PycharmProjects/textGeoParser/venv/Scripts/CleanUPSites.xlsx'
+filePath = '/Users/Otter/Desktop/LACleanup/LACleanUPSites/Raw_Data/LoopNet/CleanUPSites.xlsx'
 
 
 def main():
