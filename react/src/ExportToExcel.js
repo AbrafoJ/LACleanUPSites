@@ -12,14 +12,14 @@ class ExportToExcel extends Component{
                     filename="filteredData"
                     sheet="tablexls"
                     buttonText="Export"/>
-                <table hidden="true" id="table-to-xls">
+                <table hidden={true} id="table-to-xls">
                     <thead>
                         <tr>
-                            <th>Property Listing</th>
-                            <th>Address</th>
-                            <th>Other</th>
+                            <th>Property ID</th>
+                            <th>Property ID</th>
+                            <th>Property Address</th>
                             <th>Sale Price</th>
-                            <th>Description</th>
+                            <th>Property ID</th>
                         </tr>
                     </thead>
 
@@ -27,13 +27,12 @@ class ExportToExcel extends Component{
                         {
                             this.props.posts.map(post =>{
                                 return(
-
                                    <tr key={post.id}>
-                                       <td>{post.id}</td>
+                                       <td>{post.userId}</td>
                                        <td>{post.userId}</td>
                                        <td>{post.title}</td>
-                                       <td>{post.title}</td>
                                        <td>{post.body}</td>
+                                       <td>{post.userId}</td>
                                    </tr> 
                                 )
                             })
