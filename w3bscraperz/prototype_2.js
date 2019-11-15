@@ -125,8 +125,9 @@ async function getListings(url){
         const html = response.data;
         const $ = cheerio.load(html)
         const listing_info = $('body').children().text();
+        const hyperlink = $(".small-pin-profile-container").attr("data-profile-url")
         var textFileData = "\n<START_LOOSE_ID>" + listing_count + "<LOOSE_ID>" + // Uses the count number as a "LOOSE_ID" for the entry
-          "\n<START_HYPERLINK> " + url + " <END_HYPERLINK>" + // Hyperlink, in case we need it later.
+          "\n<START_HYPERLINK> " + hyperlink + " <END_HYPERLINK>" + // Hyperlink, in case we need it later.
           "\n<START_LISTING_INFO>\n" + listing_info + "\n<END_LISTING_INFO>" + // The actual listing info, including address.
           "\n<END_LOOSE_ID>" + listing_count + "<LOOSE_ID>" +
           "\n<DELIMINATION_TAG>"; // Serves as a deliminator in the .txt file when read into Python.
