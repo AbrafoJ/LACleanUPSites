@@ -1,30 +1,38 @@
 import os
-coStarFile = 'loopNetAddresses.csv'
+import csv 
+
+# Header: Street Number, Street Name, Zipcode, Price
+coStarFile = 'scraped_LN_addresses.csv'
+# Header: Street Number, Street Name, Zipcode
 geoTrackerFile = 'geoLAaddresses.csv'
 
 coStarSet = set()
 geoTrackerSet = set()
 
 def readCoStarList():
-    print('Reading Costar List:\n')
+    print('*** Reading Costar List ***')
     with open(coStarFile) as csf:
-        line = csf.readline()
-        count = 1
-        while line:
-            print("Line {}: {}".format(count, line.strip()))
-            coStarSet.add(line.strip())
-            line = csf.readline()
-            count= count+1
+        csf_reader = csv.reader(csf, delimiter=',')
+        line_count = 0
+        for row in csf_reader:
+            if line_count == 0:
+                print(f'CoStar List Header: {", ".join(row)}')
+                line_count += 1
+            else:
+                coStarSet.add(str(row[0])+','+str(row[1])+','+str(row[2]))
+                line_count += 1
 def readGeoTrackerList():
-    print('Reading GeoTracker List:\n')
+    print('*** Reading GeoTracker List ***')
     with open(geoTrackerFile) as gtf:
-        line = gtf.readline()
-        count = 1
-        while line:
-            print("Line {}: {}".format(count, line.strip()))
-            geoTrackerSet.add(line.strip())
-            line = gtf.readline()
-            count= count+1
+        gtf_reader = csv.reader(gtf, delimiter=',')
+        line_count = 0
+        for row in gtf_reader:
+            if line_count == 0:
+                print(f'GeoTracker List Header: {", ".join(row)}')
+                line_count += 1
+            else:
+                geoTrackerSet.add(str(row[0])+','+str(row[1])+','+str(row[2]))
+                line_count += 1
 
 def main():
     readCoStarList()

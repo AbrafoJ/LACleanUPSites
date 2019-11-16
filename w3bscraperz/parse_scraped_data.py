@@ -29,7 +29,6 @@ regex_dict = {
                                   r'Way|way|Wy|wy|'
                                   r'Dr|dr|Drive|drive))'),
     'numDASHnum': re.compile(r'(?P<numDASHnum>(\d\d*)(-)(\d\d*))'),
-    'number': re.compile(r'(?P<number>\d\d*)'),
     'street': re.compile(r'(?P<street>(Street|street|STREET|St|st|'
                                   r'Avenue|avenue|AVENUE|AVE|Ave|ave|'
                                   r'Pkwy|pkwy|PKWY|Pky|pky|Parkway|parkway|'
@@ -38,7 +37,8 @@ regex_dict = {
                                   r'Boulevard|boulevard|Blvd|blvd|'
                                   r'Hwy|hwy|Highway|highway|'
                                   r'Way|way|Wy|wy|'
-                                  r'Dr|dr|Drive|drive))')
+                                  r'Dr|dr|Drive|drive))'),
+    'price': re.compile(r'(?P<price>\$(\d|\,)+\d)')
 }
 
 # Assess whether any of the contents of "line" match a regular expression defined in rx_dict.
@@ -71,6 +71,7 @@ def read_scraped_file(filename_in):
 	hyperlink = ''
 	line_1_info = ''
 	zipcode = ''
+	price = ''
 
 	street_number = ''
 	street_name = ''
@@ -110,26 +111,30 @@ def read_scraped_file(filename_in):
 				zipcode = match.group('stateANDzip')
 				zipcode = zipcode.strip()
 				zipcode = zipcode.replace('CA ', '').replace(",","|")
+			elif key == 'price' and price == '':
+				price = match.group('price')
+				price = price.strip().replace(",","")
 
-		if hyperlink != '' and street_number != '' and street_name != '' and zipcode != '':
-			if '-' in street_number:
+		if hyperlink != '' and street_number != '' and street_name != '' and zipcode != '' and price != '':
+			if '-' in street_number: # Properties sold with multiple street numbers.
 				street_nums = get_multi_nums(street_number) # Get a string list of all integers from street number (first_int-last_int).
 				for num in street_nums:
-					entry_set.add(num+', '+street_name+', '+zipcode+'\n')
+					entry_set.add(num+', '+street_name+', '+zipcode+', '+price+'\n')
 			else:
-				entry_set.add(street_number+', '+street_name+', '+zipcode+'\n')
+				entry_set.add(street_number+', '+street_name+', '+zipcode+', '+price+'\n')
 
 		hyperlink = ''
 		line_1_info = ''
 		street_number = ''
 		street_name = ''
 		zipcode = ''
+		price = ''
 
 	return entry_set
 
 def write_to_output(filename_out, listing_set):
     f = open(filename_out, "w")  # Normal naming convention for a file writer: f
-    headers = "Street Number, Street Name, Zipcode\n"
+    headers = "Street Number, Street Name, Zipcode, Price\n"
     f.write(headers)
     for entry in listing_set:
         f.write(entry)
