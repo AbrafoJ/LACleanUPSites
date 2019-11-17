@@ -92,7 +92,7 @@ def read_scraped_file(filename_in):
 				hyperlink = match.group('hyperlink')
 				hyperlink = hyperlink.replace('<START_HYPERLINK>', '')
 				hyperlink = hyperlink.replace('<END_HYPERLINK>', '')
-				hyperlink = hyperlink.strip()
+				hyperlink = hyperlink.strip().replace(",","")
 			elif key == 'dashsNumberANDsName' and line_1_info == '':
 				line_1_info = match.group('dashsNumberANDsName')
 				line_1_info = line_1_info.strip()
@@ -119,9 +119,9 @@ def read_scraped_file(filename_in):
 			if '-' in street_number: # Properties sold with multiple street numbers.
 				street_nums = get_multi_nums(street_number) # Get a string list of all integers from street number (first_int-last_int).
 				for num in street_nums:
-					entry_set.add(num+', '+street_name+', '+zipcode+', '+price+'\n')
+					entry_set.add(num+', '+street_name+', '+zipcode+', '+price+', '+hyperlink+'\n')
 			else:
-				entry_set.add(street_number+', '+street_name+', '+zipcode+', '+price+'\n')
+				entry_set.add(street_number+', '+street_name+', '+zipcode+', '+price+', '+hyperlink+'\n')
 
 		hyperlink = ''
 		line_1_info = ''
@@ -134,7 +134,7 @@ def read_scraped_file(filename_in):
 
 def write_to_output(filename_out, listing_set):
     f = open(filename_out, "w")  # Normal naming convention for a file writer: f
-    headers = "Street Number, Street Name, Zipcode, Price\n"
+    headers = "Street Number, Street Name, Zipcode, Price, Hyperlink\n"
     f.write(headers)
     for entry in listing_set:
         f.write(entry)
