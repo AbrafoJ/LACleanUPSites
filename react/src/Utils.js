@@ -3,13 +3,13 @@ import "./index.css";
 
 
 export const Logo = () =>
-<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
+<div className='logo' style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
 
 <br />
   <a href="/" target="_blank" rel="noopener noreferrer">
     <img
-      src="https://raw.githubusercontent.com/AbrafoJ/LACleanUPSites/master/LCULogo.png"
-      style={{ width: `400px`, marginTop: "2.5em" }}
+      src="https://raw.githubusercontent.com/AbrafoJ/LACleanUPSites/master/Logo.png"
+      style={{ width: `300px`, marginTop: "4em" }}
       alt=""
     />
   </a>
@@ -17,12 +17,12 @@ export const Logo = () =>
 
 export const GitHubLink = () =>
 <div style={{margin: '1rem auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
-Link to GitHub: {''}
+GitHub {''}
 <br />
   <a href="https://github.com/AbrafoJ/LACleanUPSites" target="_blank" rel="noopener noreferrer">
     <img
       src="https://raw.githubusercontent.com/AbrafoJ/LACleanUPSites/master/githublogo.png"
-      style={{ width: `30px`, margin: ".10em .3em" }}
+      style={{ width: `20px`, margin: ".10em .3em" }}
       alt=""
     />
   </a>
@@ -30,6 +30,6 @@ Link to GitHub: {''}
 
 export const Authors = () =>
 <div style={{ margin: '1rem auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
-Jordan Dorham | Diego Garcia | Joseph Gomez | Flo Yao {''}
+J. Dorham | D. Garcia | J. Gomez | F. Yao {''}
 
 </div>;

@@ -15,14 +15,17 @@ code {
 
 .ReactTable {
   /* background-color: rgb(250, 241, 220); */
-  border-spacing: 0px;
-  background: rgb(250, 241, 220);
-  margin: auto;
-  
-  width: 95%;
-  padding: 0;
-
+  border-spacing: 0px; 
+  background: rgb(253, 251, 246);
+  /* margin-top: '1000px'; */
+  width: 100%;
+  padding: 0; 
 }
+
+/* .ReactTable td {
+  text-align: center;
+} */
+
 .rt-th {
   font-size: larger;
   color:rgb(73, 73, 73);
@@ -31,12 +34,3 @@ code {
 .rt-tbody{
   color: rgb(68, 68, 68);
 }
-/* .-pageJump{
-  align-self: auto;
-  padding: 20;
-}
-.pagination-bottom{
-  display: block;
- 
-  height: fit-content;
-} */
