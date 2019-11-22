@@ -1,9 +1,14 @@
 const express = require('express');
 const jwt = require('jwt-simple');
-const API_PORT =  6969;
+const API_PORT =  4002;
 const uuid = ('uuid/v1');
 const app = express();
+const bodyParser = require('body-parser');
 
+var cors = require('cors');
+app.use (cors());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 let secret = 'lemons';
 let timeNow = new Date();
@@ -11,23 +16,31 @@ let timeNow = new Date();
 let payload = { created: new Date(),
 		expires: new Date(timeNow.getHours() + 1),
 		user: 'Matt',
-}
+};
 
+var myLogger = function (req, res, next){
+	console.log('LOGGED')
+	next()
+};
 
+app.use(myLogger);
 
-/*
-const token_object = {
-	whew: tempTimeStamp),
-	expires: new Date(tempTimeStap.getHours() + 1),
-	'hashedToken':hashed_token,
-}
-*/
+var requestTime = function (req, res, next) {
+	req.requestTime = Date.now()
+	next()
+};
+
+app.use(requestTime);
 
 const token = jwt.encode(payload,secret);
 
+app.get('/', function (req, res){
+	res.send('Hello World');
+});
+
 app.get('/getToken', function (req, res) {
-	res.json(token)
-	res.send('Hi');
+	var responseText = 'Hello World!<br>'+ req.requestTime ;
+	res.json(token);
 });
 
 
