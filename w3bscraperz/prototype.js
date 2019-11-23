@@ -20,7 +20,7 @@ async function main(url){
     .then(response => {
       const $ = cheerio.load(response.data)
 
-      for( i=1; i<=10; i++){
+      for( i=1; i<=1; i++){
         var s = 'https://www.loopnet.com/for-sale/los-angeles-ca/'+i+'/'
         console.log(s);
         getDataFromPinProfile(s);
@@ -89,7 +89,9 @@ async function getListings(url){
         const html = response.data;
         const $ = cheerio.load(html)
         const listing_info = $('body').children().text();
-        console.log(listing_info);
+        const hyperlink = $('body').data('data-profile-url');
+        console.log(hyperlink)
+        //console.log(listing_info);
     })
     .catch(console.error);
 }

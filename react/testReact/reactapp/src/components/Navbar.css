@@ -1,0 +1,25 @@
+#nav {
+    display: flex;
+    width: 95%;    
+    margin: auto;
+    padding: 0; /*tabs at the top space*/
+    list-style: none;
+    background-color:  #e3f2fd;
+    border-bottom: 2px solid #c4d4da; 
+    /* border-top: 1px solid #ccc;  */
+}
+
+#nav li a {
+    display: block;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(88, 88, 88);
+    background: #fffbf0;
+    border-right: 3px solid #c4d4da; 
+}
+
+.nav-wrapper.blue-grey.darken-3{
+    width:auto;
+    margin: auto;
+}

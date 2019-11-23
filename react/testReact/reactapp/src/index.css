@@ -1,0 +1,102 @@
+body {
+  margin-top: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e3f2fd;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.ReactTable {
+  /* background-color: rgb(250, 241, 220); */
+  border-spacing: 0px; 
+  background: rgb(253, 251, 246);
+  /* margin-top: '1000px'; */
+  width: 100%;
+  padding: 0;
+}
+
+/* .ReactTable td {
+  text-align: center;
+} */
+
+.rt-th {
+  /* margin: auto; */
+  /* border: 1px solid green; */
+  padding: 5px;
+  font-size: large;
+  height:50px;
+  color:rgb(73, 73, 73);
+}
+
+.rt-thead.-headerGroups{
+  height:40px;
+  padding-top: 5px
+}
+
+.rt-tbody{
+  color: rgb(68, 68, 68);
+}
+
+.rt-resizable-header-content{
+  margin: auto;
+  /* border: 1px solid green; */
+  padding: 10px;
+}
+
+.rt-thead.-filters{
+  /* background-color:blue; */
+  height: 50px;
+}
+/* .pagination-bottom{
+  background-color: blue;
+  height: 36px;
+} */
+
+.-pagination{
+  /* background-color: blue; */
+  height: 72px;
+}
+
+.-previous{
+  height: 64px;
+}
+.-center{
+  height: 64px;
+}
+.-next{
+  height: 64px;
+}
+
+.-pageInfo{
+  margin: auto;
+  width: 100%;
+  height: 90%;
+}
+
+.-pageJump{
+  /* display: inline-block; */
+  /* box-sizing: content-box; */
+  /* margin: auto; */
+  height: 90%;
+  /* padding: 15px 22px; */
+  /* margin: 10px 5px; */
+  box-sizing: border-box;
+
+}
+input[type="number"]{ 
+  height: 30%;
+}
+/* 
+.input[type=number]{
+    box-sizing : border-box;
+    height: 10%;
+    margin-top: 50%;
+
+} */
