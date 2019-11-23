@@ -40,21 +40,23 @@ exports.echo = (req, res) => {
   });
 }
 
-// create user
+// ************** CREATE USER CREDENTIALS **************
 exports.create_user = (req, res) => {
-
+  // (1) ---------------------------------
+  //  Receive email id and password
   let password =  req.body.password;
   let email =  req.body.email;
+  // (1) ---------------------------------
   let api_key =  req.headers.authorization
-
+  
   if (api_key !== API_KEY){
     res.json({ status: 'error', detail: 'api key is invalid' });
     return;
   }
-
+  
   let user_info = {}
   let login_token
-
+  
   let find_param = {
     'emails.address':email
   }
@@ -68,19 +70,35 @@ exports.create_user = (req, res) => {
     })
   })
   .then(() => {
-    // bcrypt of password
+    // (2) ---------------------------------
+    //  Create hashes
+    //    bcrypt of password
     let password2 = sha256(password)
     var bcrypt_hash = bcrypt.hashSync(password2, 10);
-
-    // login token which to use login
+    // (2) ---------------------------------
+    
+    // (3) ---------------------------------
+    //  Create login token which we return to client
+    //    maybe using uuid is better...
+    //    login token which to use login
     login_token = makeid('4') + parseInt(new Date().getTime()).toString(36);
+    // (3) ---------------------------------
+    
+    // (4) ---------------------------------
+    //  Create hash of login_token which is stored in mongo
     const hashed_token = crypto.createHash('sha256').update(login_token).digest('base64');
-
+    // (4) ---------------------------------
+    
+    // (5) ---------------------------------
+    //  We keep hashed tokens to use at the signin
     const token_object = {
       'when':new Date(),
       'hashedToken':hashed_token,
     };
-
+    // (5) ---------------------------------
+    
+    // (6) ---------------------------------
+    //  Create json and insert into mongodb
     let insert_params = {
       createdAt: new Date(),
       services:{
@@ -92,25 +110,28 @@ exports.create_user = (req, res) => {
         },
         email : {
           verificationTokens : [
-            {
-              // nameHash : nameHash,
-              address : email,
-              when : new Date(),
-            }
+          {
+            // nameHash : nameHash,
+            address : email,
+            when : new Date(),
+          }
           ]
         },
       },
       emails : [
-        {
-          "address" : email,
-          "verified" : false
-        }
+      {
+        "address" : email,
+        "verified" : false
+      }
       ],
       profile : {},
     }
-
-    // insert
+    // (6) ---------------------------------
+    
+    // (7) ---------------------------------
+    //  Insert user info into MongoDB
     return mongoDbHelper.collection(USERS_COL).insert(insert_params)
+    // (7) ---------------------------------
   })
   .then((results) => {
 
@@ -137,6 +158,7 @@ exports.create_user = (req, res) => {
   })
 }
 
+// ************** SIGN-IN PROCESS HERE **************
 // login with email and password
 exports.login_with_email_password = (req, res) => {
 
@@ -251,8 +273,13 @@ exports.logout = (req, res) => {
     res.json({ status: 'error', detail: 'api key is invalid' });
     return;
   }
-
+  // (1) ---------------------------------
+  //  Create hash from login token
   const hashed_token = crypto.createHash('sha256').update(login_token).digest('base64');
+  // (1) ---------------------------------
+
+  // (2) ---------------------------------
+  //  Find user with elemMatch
   let find_param = {
     'services.resume.loginTokens':{
       '$elemMatch':{
@@ -260,37 +287,37 @@ exports.logout = (req, res) => {
       }
     }
   }
+  // (2) ---------------------------------
 
-  // find user
+  // (3) ---------------------------------
+  // Find user credentials in MongoDB
   mongoDbHelper.collection(USERS_COL).findOne(find_param)
   .then((results) => {
 
-    if (results === null){
+  if (results === null){
       return Promise.reject("no such token")
-    }
-
-    let find_param = {
-      '_id':results._id
-    };
-    var upd_param = {
-      '$pull':{
-        'services.resume.loginTokens':{
-          'type':'ios'
-        }
+  }
+  
+  let find_param = {
+    '_id':results._id
+  };
+  var upd_param = {
+    '$pull':{
+      'services.resume.loginTokens':{
+        'type':'ios'
       }
-    };
-    return mongoDbHelper.collection(USERS_COL).update(find_param, upd_param)
+    }
+  };
+  return mongoDbHelper.collection(USERS_COL).update(find_param, upd_param)
   })
   .then(() => {
-    return new Promise((resolve, reject) => {
-
-    })
-    req.session.destroy((err) => {
-      if (err) {
-        reject(err)
-      }
-      resolve()
-    })
+  return new Promise((resolve, reject) => {})
+  req.session.destroy((err) => {
+    if (err) {
+      reject(err)
+    }
+    resolve()
+  })
   })
   .then(() => {
     res.json({status: 'success'})
@@ -298,6 +325,7 @@ exports.logout = (req, res) => {
   .catch((err) => {
      res.json({status: 'error', detail: err})
   })
+  // (3) ---------------------------------
 }
 
 // login_with_token
