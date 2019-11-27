@@ -57,11 +57,7 @@ class App extends React.Component{
              <Route path="/favorites" component={Favorites} />   
              <Route component={NotFound} />   
           </Switch>
-          {/* <div className="appbar">
-            <MuiThemeProvider>
-            <AppBar style={{ background: '#636363',width:"84%",margin:"auto" }}/>
-            </MuiThemeProvider>
-          </div> */}
+
 
         </div>
       </BrowserRouter>

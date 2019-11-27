@@ -3,10 +3,11 @@
 export const signIn = (credentials) => {
     return (dispatch, getState) => {
      
-        console.log('hi',credentials)
+        console.log('authActions signIn credentials',credentials)
         // AUTHENTICATION MAGIC HAPPENS HERE
         // FOR NOW I JUST SET EVERYTHING TO SUCCESS
         dispatch({ type: 'LOGIN_SUCCESS' });
+        //else LOGIN_ERROR
 
     }
 }
@@ -16,6 +17,15 @@ export const signOut = () => {
         dispatch({ type: 'LOGOUT_SUCCESS' });
     }
 }
+
+export const signUp = (newUser) => {
+    console.log('authActions signUp newUser: ',newUser)
+    return (dispatch, getState) => {
+        dispatch({ type: 'REG_SUCCESS' });
+        //ELSE REG_FAIL
+    }
+}
+
 
 //   var apiBaseUrl = "http://localhost:4000/api/";
 //   var payload={
@@ -48,3 +58,39 @@ export const signOut = () => {
 //   }).catch(function (error) {
 //     console.log(error);
 //   });
+
+// var apiBaseUrl = "http://localhost:4000/api/";
+// console.log("values",this.state.first_name,this.state.last_name,this.state.email,this.state.password);
+// //To be done:check for empty values before hitting submit
+// var self = this;
+// var payload = {
+//               "first_name": this.state.first_name,
+//               "last_name":this.state.last_name,
+//               "email":this.state.email,
+//               "password":this.state.password
+//               }
+
+// axios.post(apiBaseUrl+'/register', payload)
+
+// .then(function (response) {
+//  console.log(response);
+//  if(response.data.code == 200){
+//   //  console.log("registration successfull");
+//    var loginscreen = [];
+
+//    loginscreen.push(<Login parentContext={this}/>);
+
+//    //var loginmessage = "Not Registered yet. Go to registration";
+//    var loginmessage = "register.js";
+
+//    self.props.parentContext.setState({
+//                                       loginscreen:loginscreen,
+//                                       loginmessage:loginmessage,
+//                                       buttonLabel:"Register",
+//                                       isLogin:true
+//                                     });
+//  }
+// })
+// .catch(function (error) {
+//  console.log(error);
+// });

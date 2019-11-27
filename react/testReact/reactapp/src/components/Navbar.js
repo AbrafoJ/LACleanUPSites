@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 // 1. connect to redux state
 // 2. just give navbar rootReducer which will go into authReducer (which handles auth)
 // ====================================================================================
-const Navbar = (props) => {
+const Navbar = (props) => { 
 	// const { auth } = props;
 	// const links = auth.uid ? <LoggedInNav /> : <LoggedOutNav /> if links is true, user is signed in, if not, user is signed out
 	var bool = false;
@@ -29,12 +29,15 @@ const Navbar = (props) => {
 	)
 }
 // ====================================================================================
-//
+// function that takes in the state,
+// inside function we return an object which represents things we wanna attach to props
 // ====================================================================================
 const mapStateToProps = (state) => {
-	console.log('hi',state);
+	console.log('NavBar mapStatetoProps hi',state);
 	return {
 		//auth: . . .
 	}
 }
+
+// we want to map our state (status) to our props
 export default connect(mapStateToProps)(Navbar);
