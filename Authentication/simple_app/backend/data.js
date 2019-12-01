@@ -6,9 +6,10 @@ const Schema = mongoose.Schema;
 const DataSchema = new Schema(
   {
     id: Number,
-    username: String,
-    salt: String,
-    hashed_psswd: String
+    username:{ type:String, required: true, unique: true},
+    salt: {type: String, required: true, unique: true},
+    hashed_psswd: {type: String, required: true, unique: true},
+    favorites: []
   },
   { timestamps: true }
 );
