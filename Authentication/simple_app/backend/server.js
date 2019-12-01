@@ -15,7 +15,7 @@ const router = express.Router();
 const dbRoute = 'mongodb://localhost:27017/test';
 
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
+mongoose.connect(dbRoute, { useNewUrlParser: true , useUnifiedTopology: true});
 
 let db = mongoose.connection;
 
@@ -65,10 +65,10 @@ router.post('/putData', (req, res) => {
   let data = new Data();
 
   const { id, username, salt, hashed_psswd } = req.body;
-  Data.findOne({username}, function(err, data){
+  Data.findOne({username}, function(err, obj){
     if(err) console.log(err);
     //data exists; send back error
-    if(data){
+    if(obj){
       return res.json({
         success: false,
         error: 'DUPLICATE USERNAME',
