@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const DataSchema = new Schema(
   {
     id: Number,
+    username: String,
     salt: String,
     hashed_psswd: String
   },

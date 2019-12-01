@@ -12,7 +12,7 @@ app.use(cors());
 const router = express.Router();
 
 // this is our MongoDB database
-const dbRoute = 'mongodb://localhost:27017';
+const dbRoute = 'mongodb://localhost:27017/test';
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
@@ -28,7 +28,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(logger('dev'));
+//app.use(logger('dev'));
 
 // this is our get method
 // this method fetches all available data in our database
@@ -64,21 +64,45 @@ router.delete('/deleteData', (req, res) => {
 router.post('/putData', (req, res) => {
   let data = new Data();
 
-  const { id, salt, hashed_psswd } = req.body;
-
-  if ((!id && id !== 0) || !salt || !hashed_psswd) {
-    return res.json({
-      success: false,
-      error: 'INVALID INPUTS',
-    });
-  }
-  data.salt = salt;
-  data.hashed_psswd = hashed_psswd;
-  data.id = id;
-  data.save((err) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
+  const { id, username, salt, hashed_psswd } = req.body;
+  Data.findOne({username}, function(err, data){
+    if(err) console.log(err);
+    //data exists; send back error
+    if(data){
+      return res.json({
+        success: false,
+        error: 'DUPLICATE USERNAME',
+      });
+    //we good
+    }else{
+      console.log("new user")
+      data.salt = salt;
+      data.hashed_psswd = hashed_psswd;
+      data.username = username;
+      data.id = id;
+      data.save((err) => {
+        if (err) return res.json({ success: false, error: err });
+        
+        return res.json({ success: true });
+      });
+    }
+  })
+  //alert('server')
+  // if ((!id && id !== 0) || !username || !salt || !hashed_psswd) {
+  //   return res.json({
+  //     success: false,
+  //     error: 'INVALID INPUTS',
+  //   });
+  // }
+  // data.salt = salt;
+  // data.hashed_psswd = hashed_psswd;
+  // data.username = username;
+  // data.id = id;
+  // data.save((err) => {
+  //   if (err) return res.json({ success: false, error: err });
+    
+  //   return res.json({ success: true });
+  // });
 });
 
 // append /api for our http requests

@@ -9,21 +9,15 @@ import { Container, Grid } from 'semantic-ui-react'
 import LoginForm from './LoginForm'
 
 class Home extends Component {
-
   render() {
-
     return(
       <Container className='home' style={{textAlign: 'center'}}>
-
         <Grid style={{marginTop:60}}>
           <Grid.Column textAlign='right' width={16}>
             <Link to="/create_acount">Create an account</Link>
           </Grid.Column>
         </Grid>
-
-
         <LoginForm />
-
       </Container>
     )
   }

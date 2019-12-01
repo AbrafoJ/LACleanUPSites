@@ -24,7 +24,6 @@ import { LOCAL_STRAGE_KEY } from '../utils/Settings'
 import { loginWithEmailRedux } from '../actions/UserActions'
 
 class App extends Component {
-
   componentDidMount() {
     // Login check
 
@@ -48,10 +47,7 @@ class App extends Component {
 
     MyAPI.signinWithToken(param)
     .then((data) => {
-
-
       return new Promise((resolve, reject) => {
-
         if (data.status !== 'success'){
           reject('error')
         } else {
@@ -73,33 +69,22 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
-
         <Switch>
-
           <Route exact path='/' render={() => (
             <Home />
           )} />
-
           <Route exact path='/notfound' component={NoMatch} />
-
           <Route exact path='/dashboard' render={() => (
             <Dashboard />
           )} />
-
-
           <Route exact path='/create_acount' render={() => (
             <CreateAccont />
           )} />
-
           <Route component={NoMatch} />
-
         </Switch>
-
         <Alert stack={{limit: 3}} />
-
       </div>
     );
   }

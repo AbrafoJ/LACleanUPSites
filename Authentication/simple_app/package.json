@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "concurrently": "^5.0.0",
+    "mongodb": "^3.3.5"
   },
   "comments": {
     "scripts_start": "Run the backend and front end at the same time."

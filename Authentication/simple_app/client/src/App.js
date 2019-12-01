@@ -36,6 +36,7 @@ class App extends Component {
   state = {
     data: [],
     id: 0,
+    username: "",
     salt: null,
     message: null,
     hashed_psswd: null,
@@ -76,19 +77,24 @@ class App extends Component {
     fetch('http://localhost:3001/api/getData')
       .then((data) => data.json())
       .then((res) => this.setState({ data: res.data }));
+      
   };
 
   // our put method that uses our backend api
   // to create new query into our data base
-  putDataToDB = (salt,hashed_psswd) => {
+  putDataToDB = (salt,hashed_psswd, username) => {
     let currentIds = this.state.data.map((data) => data.id);
+    //alert(data)
+    //alert(currentIds);
     let idToBeAdded = 0;
+    console.log( 'put' , this.state )
     while (currentIds.includes(idToBeAdded)) {
       ++idToBeAdded;
     }
 
     axios.post('http://localhost:3001/api/putData', {
       id: idToBeAdded,
+      username: username,
       salt: salt,
       hashed_psswd: hashed_psswd,
     });
@@ -141,6 +147,7 @@ class App extends Component {
 		        {data.length <= 0 ? 'NO DB ENTRIES YET' : data.map((dat)=> (
 		            <li style={{ padding: '10px' }} key={data.id}>
 		                <span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
+                    <span style={{ color: 'gray' }}> username: </span> {dat.username} <br />
 		                <span style={{ color: 'gray' }}> salt: </span> {dat.salt} <br />
 		                <span style={{ color: 'gray' }}> hashed_psswd: </span> {dat.hashed_psswd}
 		            </li>

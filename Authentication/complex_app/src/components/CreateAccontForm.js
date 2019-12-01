@@ -13,16 +13,13 @@ import Alert from 'react-s-alert';
 import { loginWithEmailRedux } from '../actions/UserActions'
 
 class CreateAccontForm extends Component {
-
   state = {
     email: '',
     password: '',
   }
 
   onSubmit = () => {
-
     const { email, password } = this.state
-
     const params = {
       email: email,
       password: password,
@@ -38,11 +35,8 @@ class CreateAccontForm extends Component {
         user: data.user,
         login_token: data.login_token,
       }
-
       localStorage.setItem(LOCAL_STRAGE_KEY, JSON.stringify(params))
-
       this.props.mapDispatchToLoginWithPassword(params)
-
     })
     .then(() => {
       // redirect
@@ -50,7 +44,6 @@ class CreateAccontForm extends Component {
     })
     .catch((err) => {
       console.log("err:", err)
-
       Alert.error(err, {
         position: 'top-right',
         effect: 'slide',
@@ -64,16 +57,11 @@ class CreateAccontForm extends Component {
   }
 
   render() {
-
     const { email, password } = this.state
-
     return(
       <Container text className='create_acount_form'>
-
-
         <Form onSubmit={this.onSubmit} style={{marginTop:60}}>
           <Grid>
-
             <Grid.Column textAlign='left' width={16}>
               <label>Email</label>
               <Input
@@ -105,11 +93,8 @@ class CreateAccontForm extends Component {
                 disabled={this.state.loading}
                 type='submit'>Create an account</Button>
             </Grid.Column>
-
           </Grid>
-
         </Form>
-
       </Container>
     )
   }
