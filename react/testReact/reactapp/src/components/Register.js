@@ -8,6 +8,7 @@ import Login from './Login';
 import { Logo } from '../Utils.js'
 import { connect } from 'react-redux'
 import { signUp } from '../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
 // import { updateDB } from '../store/actions/authActions'
 // import { putDataToDB } from '../store/actions/authActions'
 // import { getDataFromDB } from '../store/actions/authActions'
@@ -22,25 +23,19 @@ class Register extends Component {
                 first_name:'',
                 last_name:'',
                 email:'',
-                password:'',
-                data: [],
-                id: 0,
-                salt: null,
-                message: null,
-                hashed_psswd: null,
-                intervalIsSet: false,
-                idToDelete: null,
-                idToUpdate: null
+                password:''
                }
   }
 
-  handleClick(event){
-    event.preventDefault();
-    console.log('Register.js handleClick this.state ',this.state)
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Register.js handleSubmit this.state ',this.state)
     this.props.signUp(this.state)
   }
 
   render() {
+    const { auth } = this.props;
+    if (auth['auth']) return <Redirect to='/main' />
     return (
       <div>
         <MuiThemeProvider>
@@ -72,7 +67,7 @@ class Register extends Component {
              onChange = {(event,newValue) => this.setState({password:newValue})}
              />
            <br/>
-           <RaisedButton label="Submit" primary={true} style={{margin:'15px'}} onClick={(event) => this.handleClick(event)}/>
+           <RaisedButton label="Submit" primary={true} style={{margin:'15px'}} onClick={(event) => this.handleSubmit(event)}/>
           </div>
          </MuiThemeProvider>
       </div>
@@ -81,13 +76,14 @@ class Register extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError
+    //authError: state.auth.authError
+    auth: state.auth
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signUp: (newUserCreds) => dispatch(signUp(newUserCreds))
+    signUp: (newUser) => dispatch(signUp(newUser))
   }
 }
 
