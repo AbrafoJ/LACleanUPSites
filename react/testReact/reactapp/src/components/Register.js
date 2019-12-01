@@ -8,6 +8,11 @@ import Login from './Login';
 import { Logo } from '../Utils.js'
 import { connect } from 'react-redux'
 import { signUp } from '../store/actions/authActions'
+// import { updateDB } from '../store/actions/authActions'
+// import { putDataToDB } from '../store/actions/authActions'
+// import { getDataFromDB } from '../store/actions/authActions'
+
+import { mapPropsStream } from 'recompose';
 
 // Child of loginscreen
 class Register extends Component {
@@ -17,11 +22,21 @@ class Register extends Component {
                 first_name:'',
                 last_name:'',
                 email:'',
-                password:''
+                password:'',
+                data: [],
+                id: 0,
+                salt: null,
+                message: null,
+                hashed_psswd: null,
+                intervalIsSet: false,
+                idToDelete: null,
+                idToUpdate: null
                }
   }
 
   handleClick(event){
+    event.preventDefault();
+    console.log('Register.js handleClick this.state ',this.state)
     this.props.signUp(this.state)
   }
 

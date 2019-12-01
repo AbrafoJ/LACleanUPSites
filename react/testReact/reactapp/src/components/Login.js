@@ -24,7 +24,7 @@ constructor(props){
 
  handleClick(event){
    //event.preventDefault();
-   //console.log(this.state)
+   console.log('login',this.state)
    this.props.signIn(this.state)
  }
 
