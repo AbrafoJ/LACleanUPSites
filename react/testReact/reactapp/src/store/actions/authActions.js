@@ -2,6 +2,8 @@
 
 import React, { Component } from "react";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 //import Mongo from '../../components/mongo'
 
 // Required for password hashing
@@ -34,35 +36,13 @@ var data = []
 // ------------------------------------------------------------------------------
 export const getDataFromDb = () => {
     fetch('http://localhost:3001/api/getData')
-      .then((data) => data.json())
-      .then((res) => this.setState({ 
-          data: res.data
-        }));
-  };
+      .then(function(data){
+        console.log("HEY",data);
 
-    // our put method that uses our backend api
-  // to create new query into our data base
-export const putDataToDB = (salt,hashed_psswd,username) => {
-    // let currentIds = this.state.data.map((data) => data.id);
-    // let idToBeAdded = 0;
-    // while (currentIds.includes(idToBeAdded)) {
-    //   ++idToBeAdded;
-    // }
-
-    console.log('SALT and HASH' , salt, hashed_psswd )
-    axios.post('http://localhost:3001/api/putData', {
-      id: 0,
-      username: username,
-      salt: salt,
-      hashed_psswd: hashed_psswd,
-    });
-    
-    // .then(function(data) {
-    //     console.log('putdatatodb',data)
-    //     //console.log('putdatatodb',response.username)
-    // });
-    //getData();
-    //console.log('getData',getData());
+        
+      }).catch((error)=>{
+        console.log('getDataToDB error',error)
+      }); 
   };
 
   // our delete method that uses our backend api
@@ -82,7 +62,6 @@ export const deleteFromDB = (idTodelete) => {
       },
     });
   };
-
 //   // our update method that uses our backend api
 //   // to overwrite existing data base information
 //   export const updateDB = (idToUpdate, updateToApply) => {
@@ -102,32 +81,89 @@ export const deleteFromDB = (idTodelete) => {
 
 export const signUp = (newUser) => {
     console.log('authActions signUp newUser: ',newUser)
-
     return (dispatch, getState) => {
         console.log('authActions getState',getState)
-        //const mong = 
         const username = newUser['email'];
         const salt = genRandomString(16);
-        const hash = sha512(username,salt).passwordHash 
-        //console.log("salt",salt)
-        //console.log("newUser",newUser['email'])
-        //console.log('SALT and HASH' , salt, sha512(email,salt).passwordHash )
-        putDataToDB( salt,  hash, username )
 
-
-        
-        dispatch({ type: 'REG_SUCCESS' });
-        //ELSE REG_FAIL
+        // change this
+        const hashed_psswd = sha512( newUser.password , salt ).passwordHash 
+        axios.post('http://localhost:3001/api/putData', {
+          id: 0,
+          username: username,
+          salt: salt,
+          hashed_psswd: hashed_psswd,
+        }).then(function(res){
+          var status = res.data['success'];
+          if(status) {
+            dispatch({ type: 'REG_SUCCESS' }); 
+          } else {
+            dispatch({ type: 'REG_ERROR' });
+          }
+          return res
+        }).catch((error)=>{
+          console.log('putDataToDB error',error)
+        });
     }
 }
 
 export const signIn = (credentials) => {
     return (dispatch, getState) => {
-     
         console.log('authActions signIn credentials',credentials)
-        // AUTHENTICATION MAGIC HAPPENS HERE
-        // FOR NOW I JUST SET EVERYTHING TO SUCCESS
-        dispatch({ type: 'LOGIN_SUCCESS' });
+        // credentials = {username: "", password"""}
+        //console.log('I AM HERE',credentials)
+        // fetch('http://localhost:3001/api/getData')
+        // .then((data) => data.json())
+        // .then((res) => this.setState({ 
+        //     data: res.data
+        // }));
+
+        axios.post('http://localhost:3001/api/signIn', {
+          id: 1,
+          user: credentials.username
+        }).then((res)=>{
+          // i got back salt, hash it, send it back to server
+          // with the username (server compares it with its username in mongo)
+          console.log("I GOT SALT",res.data)
+          var hashed_psswd = sha512(credentials.password,res.data).passwordHash 
+
+          axios.post('http://localhost:3001/api/checkHash', {
+            id: 2,
+            user: credentials.username,
+            hashed_psswd: hashed_psswd
+          }).then(function(res){
+            console.log('client side has verified salt',res.data)
+            if(res.data.success){
+              dispatch({ type: 'LOGIN_SUCCESS' });
+            }
+            else{
+              alert('Invalid username or password.')
+              dispatch({ type: 'LOGIN_ERROR'})
+            }
+          })
+        }).catch((err)=> {
+           alert(err)
+           dispatch({ type: 'LOGIN_ERROR'})
+           //console.log('signin',err)
+        });
+
+
+        // fetch('http://localhost:3001/api/getData')
+        // .then(function(data){
+        //   console.log("HEY",data);
+          
+          
+        // }).catch((error)=>{
+        //   console.log('putDataToDB error',error)
+        // }); 
+        // //axios.get('http://localhost:3001/api/getData')
+        // axios.get('http://localhost:3001/api/getData')
+        // .then(response => {
+        //   console.log(response.data);
+        // }, error => {
+        //   console.log(error);
+        // });
+        //dispatch({ type: 'LOGIN_SUCCESS' });
         //else LOGIN_ERROR
 
     }

@@ -11,6 +11,7 @@ import UploadScreen from './UploadScreen';
 import { Logo } from '../Utils.js'
 import { connect } from 'react-redux'
 import { signIn } from '../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
 
 // Child of loginscreen
 class Login extends Component {
@@ -24,19 +25,22 @@ constructor(props){
 
  handleClick(event){
    //event.preventDefault();
-   console.log('login',this.state)
+   //console.log('login',this.state)
    this.props.signIn(this.state)
  }
 
 render() {
+    const { auth } = this.props;
+    if (auth['auth']) return <Redirect to='/main' />
+
     return (
       <div>
         <MuiThemeProvider>
           <div>
            <Logo />
            <TextField
-             hintText = "Enter Username"
-             floatingLabelText = "Username"
+             hintText = "Enter Email"
+             floatingLabelText = "Email"
              onChange = {( event, newValue ) => this.setState({ username: newValue })}
              />
            <br/>
@@ -61,7 +65,7 @@ render() {
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError
+    auth: state.auth
   }
 }
 

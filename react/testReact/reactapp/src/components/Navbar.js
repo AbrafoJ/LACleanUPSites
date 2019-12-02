@@ -15,10 +15,10 @@ import { connect } from 'react-redux'
 // 2. just give navbar rootReducer which will go into authReducer (which handles auth)
 // ====================================================================================
 const Navbar = (props) => { 
-	// const { auth } = props;
-	// const links = auth.uid ? <LoggedInNav /> : <LoggedOutNav /> if links is true, user is signed in, if not, user is signed out
-	var bool = false;
-	const links = bool ? <LoggedInNav /> : <LoggedOutNav />;
+	const { auth } = props;
+	const links = auth['auth'] ? <LoggedInNav /> : <LoggedOutNav /> //if links is true, user is signed in, if not, user is signed out
+	//var bool = false;
+	//const links = bool ? <LoggedInNav /> : <LoggedOutNav />;
 	return (
 		<nav className="nav-wrapper blue-grey darken-3">
 			<div className="container">
@@ -35,7 +35,7 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
 	console.log('NavBar mapStatetoProps hi',state);
 	return {
-		//auth: . . .
+		auth: state.auth
 	}
 }
 
