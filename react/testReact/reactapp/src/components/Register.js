@@ -29,46 +29,45 @@ class Register extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Register.js handleSubmit this.state ',this.state)
+    e.preventDefault();
     if(!this.state.first_name){
-	alert('first name required')
-    }else if (!this.state.last_name){
-	alert('last name required')
-    }else if (!this.state.email){
-	alert('email required')
-    }else if (!this.state.password){
-	alert('password rquired')
-    }else {
+    alert('first name required')
+      }else if (!this.state.last_name){
+    alert('last name required')
+      }else if (!this.state.email){
+    alert('email required')
+      }else if (!this.state.password){
+    alert('password rquired')
+      }else {
 	    
     console.log('Register.js handleSubmit this.state ',this.state)
     this.props.signUp(this.state)
     }
-   }
+  }
 
   render() {
     const { auth } = this.props;
     if (auth['auth']) return <Redirect to='/main' />
+    
     return (
       <div>
         <MuiThemeProvider>
           <div>
            <Logo />
            <TextField
-	     
              hintText="Enter your First Name"
              floatingLabelText="First Name"
              onChange = {(event,newValue) => this.setState({first_name:newValue})}
-	     required
              />
            <br/>
            <TextField
-	     required
              hintText="Enter your Last Name"
              floatingLabelText="Last Name"
              onChange = {(event,newValue) => this.setState({last_name:newValue})}
              />
            <br/>
            <TextField
-	     required
              hintText="Enter your Email"
              type="email"
              floatingLabelText="Email"
@@ -76,7 +75,6 @@ class Register extends Component {
              />
            <br/>
            <TextField
-	     required
              type = "password"
              hintText="Enter your Password"
              floatingLabelText="Password"
@@ -96,7 +94,6 @@ const mapStateToProps = (state) => {
     auth: state.auth
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return {

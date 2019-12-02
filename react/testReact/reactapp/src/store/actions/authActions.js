@@ -36,10 +36,13 @@ var data = []
 // ------------------------------------------------------------------------------
 export const getDataFromDb = () => {
     fetch('http://localhost:3001/api/getData')
-      .then((data) => data.json())
-      .then((res) => this.setState({ 
-          data: res.data
-        }));
+      .then(function(data){
+        console.log("HEY",data);
+
+        
+      }).catch((error)=>{
+        console.log('getDataToDB error',error)
+      }); 
   };
 
   // our delete method that uses our backend api
@@ -82,7 +85,9 @@ export const signUp = (newUser) => {
         console.log('authActions getState',getState)
         const username = newUser['email'];
         const salt = genRandomString(16);
-        const hashed_psswd = sha512(username,salt).passwordHash 
+
+        // change this
+        const hashed_psswd = sha512( newUser.password , salt ).passwordHash 
         axios.post('http://localhost:3001/api/putData', {
           id: 0,
           username: username,
@@ -105,9 +110,60 @@ export const signUp = (newUser) => {
 export const signIn = (credentials) => {
     return (dispatch, getState) => {
         console.log('authActions signIn credentials',credentials)
-        // AUTHENTICATION MAGIC HAPPENS HERE
-        // FOR NOW I JUST SET EVERYTHING TO SUCCESS
-        dispatch({ type: 'LOGIN_SUCCESS' });
+        // credentials = {username: "", password"""}
+        //console.log('I AM HERE',credentials)
+        // fetch('http://localhost:3001/api/getData')
+        // .then((data) => data.json())
+        // .then((res) => this.setState({ 
+        //     data: res.data
+        // }));
+
+        axios.post('http://localhost:3001/api/signIn', {
+          id: 1,
+          user: credentials.username
+        }).then((res)=>{
+          // i got back salt, hash it, send it back to server
+          // with the username (server compares it with its username in mongo)
+          console.log("I GOT SALT",res.data)
+          var hashed_psswd = sha512(credentials.password,res.data).passwordHash 
+
+          axios.post('http://localhost:3001/api/checkHash', {
+            id: 2,
+            user: credentials.username,
+            hashed_psswd: hashed_psswd
+          }).then(function(res){
+            console.log('client side has verified salt',res.data)
+            if(res.data.success){
+              dispatch({ type: 'LOGIN_SUCCESS' });
+            }
+            else{
+              alert('Invalid username or password.')
+              dispatch({ type: 'LOGIN_ERROR'})
+            }
+          })
+        }).catch((err)=> {
+           alert(err)
+           dispatch({ type: 'LOGIN_ERROR'})
+           //console.log('signin',err)
+        });
+
+
+        // fetch('http://localhost:3001/api/getData')
+        // .then(function(data){
+        //   console.log("HEY",data);
+          
+          
+        // }).catch((error)=>{
+        //   console.log('putDataToDB error',error)
+        // }); 
+        // //axios.get('http://localhost:3001/api/getData')
+        // axios.get('http://localhost:3001/api/getData')
+        // .then(response => {
+        //   console.log(response.data);
+        // }, error => {
+        //   console.log(error);
+        // });
+        //dispatch({ type: 'LOGIN_SUCCESS' });
         //else LOGIN_ERROR
 
     }
