@@ -35,7 +35,7 @@ var userModel = mongoose.model('userModel', userSchema);
 var testUserInstance = new userModel({
 	userName: 'Flo',
 	passwordHash: 'hardcarry',
-	favorites:[],
+	favorites:['5dd1ee5076945c417332884a','5dd1ee5076945c417332884b'],
 	deleted: []
 });
 
@@ -47,7 +47,7 @@ testUserInstance.save(function (err) {
 	console.log('Probably saved');
 })
 
-
+/*
 userModel.find({'userName':'Flo'}, 'userName passwordHash favorites', function(err, users){
 	if (err) {
 		console.log(err)
@@ -56,6 +56,6 @@ userModel.find({'userName':'Flo'}, 'userName passwordHash favorites', function(e
 		console.log(user.favorites)
 	}
 });
-
+*/
 module.exports = mongoose.model("userModel", userSchema);
 //console.log("Everything works alright if you make it to this point in the code");

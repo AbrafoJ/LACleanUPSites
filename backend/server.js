@@ -49,10 +49,12 @@ router.get('/getUsers', (req, res) => {
 	});
 });
 router.post('/favorites',(req, res) => {
-	var check = req.body.userName;//usernamme to check against
-	Users.userName.find({userName: check}, 'favorites', function(err, someValue){
+	var check = req.body.user;//usernamme to check against
+	console.log('server',check);
+	Users.find({'userName': check}, 'userName favorites', function(err, data){
 		if(err) console.log(err);
-		res.send(someValue);
+		console.log('server2 data', data)
+		res.json(data);
 	});
 });
 
