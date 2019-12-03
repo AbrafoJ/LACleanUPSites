@@ -54,7 +54,7 @@ router.post('/favorites',(req, res) => {
 	Users.find({'userName': user}, 'userName favorites', function(err, data){
 		if(err) console.log(err);
 		console.log('server2 data', data)
-		res.json(data);
+		res.json({favorites:data});
 	});
 });
 router.get('/flo',(req, res) => {

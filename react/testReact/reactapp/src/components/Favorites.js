@@ -3,6 +3,7 @@ import React from 'react';
 // ReactTable
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import { connect } from 'react-redux'
 
 // Header, Footer
 //import { Authors, Logo, GitHubLink } from "/Users/flo/Desktop/491/testReact/testapp/src/Utils.js";
@@ -18,6 +19,7 @@ class Favorites extends React.Component{
 	}
 
 	componentDidMount(){
+		
 		// this link will be replaced with our data
 		const url = "https://jsonplaceholder.typicode.com/posts";
 		fetch(url, {
@@ -149,4 +151,11 @@ class Favorites extends React.Component{
 	}
 }
 
-export default Favorites;
+const mapStateToProps = (state) => {
+	console.log('fav.js mapStatetoProps hi',state);
+	return {
+		auth: state.auth
+	}
+}
+
+export default connect(mapStateToProps)(Favorites);
