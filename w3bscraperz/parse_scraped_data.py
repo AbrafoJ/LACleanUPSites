@@ -113,8 +113,8 @@ def read_scraped_file(filename_in):
 				zipcode = zipcode.replace('CA ', '').replace(",","|")
 			elif key == 'price' and price == '':
 				price = match.group('price')
-				price = price.strip().replace(",","")
-
+				price = price.strip().replace(",","").replace("$","")
+                                
 		if hyperlink != '' and street_number != '' and street_name != '' and zipcode != '' and price != '':
 			if '-' in street_number: # Properties sold with multiple street numbers.
 				street_nums = get_multi_nums(street_number) # Get a string list of all integers from street number (first_int-last_int).
