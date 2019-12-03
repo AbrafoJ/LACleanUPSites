@@ -153,6 +153,7 @@ class Favorites extends React.Component{
 
 const mapStateToProps = (state) => {
 	console.log('fav.js mapStatetoProps hi',state);
+	
 	return {
 		auth: state.auth
 	}
