@@ -6,6 +6,8 @@ const Schema = mongoose.Schema;
 const DataSchema = new Schema(
   {
     id: Number,
+    first_name:{ type:String, required: true, unique: false},
+    last_name:{ type:String, required: true, unique: false},
     username:{ type:String, required: true, unique: true},
     salt: {type: String, required: true, unique: true},
     hashed_psswd: {type: String, required: true, unique: true},

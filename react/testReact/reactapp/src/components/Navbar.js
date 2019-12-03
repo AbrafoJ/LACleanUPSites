@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 // ====================================================================================
 const Navbar = (props) => { 
 	const { auth } = props;
-	const links = auth['auth'] ? <LoggedInNav /> : <LoggedOutNav /> //if links is true, user is signed in, if not, user is signed out
+	const links = auth['auth'] ? <LoggedInNav auth={auth}/> : <LoggedOutNav /> //if links is true, user is signed in, if not, user is signed out
 	//var bool = false;
 	//const links = bool ? <LoggedInNav /> : <LoggedOutNav />;
 	return (

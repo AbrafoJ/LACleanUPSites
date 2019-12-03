@@ -71,20 +71,20 @@ router.post('/checkHash', (req, res) => {
     let data = new Data();
     const { id, user, hashed_psswd } = req.body;
     
-    Data.findOne({'username': user},'username hashed_psswd',(err,data)=> {
+    Data.findOne({'username': user},'username hashed_psswd first_name last_name',(err,data)=> { 
       //console.log('HELOL',data.username)
       if(err) return res.json({success:false,error:err});
       // return success if hashes match
       if( !data ) return res.json({success:false,error:err});
       if(user === data.username && hashed_psswd === data.hashed_psswd){     
         console.log("server likes the hashes")
-        return res.json({ success: true });
+        return res.json({ success: true, first_name:data.first_name, last_name:data.last_name }); 
       }
       else{
         console.log("userhash",hashed_psswd)
         console.log("serverhash",data.hashed_psswd)
         console.log("server says hashes dont match")
-        return res.json({success:false,error:err})
+        return res.json({success:false,error:err}) 
       }
       // }catch(err){
       //   console.log("post/checkHash",err)
@@ -120,7 +120,9 @@ router.delete('/deleteData', (req, res) => {
 router.post('/putData', (req, res) => {
   let data = new Data();
 
-  const { id, username, salt, hashed_psswd } = req.body;
+  const { id, first_name, last_name, username, salt, hashed_psswd } = req.body;
+  console.log('first_name', first_name)
+  console.log('last_name', last_name)
   console.log('username',username)
   console.log('hashed_psswd',hashed_psswd)
   Data.findOne({username}, function(err, obj){
@@ -134,6 +136,8 @@ router.post('/putData', (req, res) => {
     //we good
     }else{
       console.log("new user")
+      data.first_name = first_name;
+      data.last_name = last_name;
       data.salt = salt;
       data.hashed_psswd = hashed_psswd;
       data.username = username;
@@ -141,7 +145,7 @@ router.post('/putData', (req, res) => {
       data.save((err) => {
         if (err) return res.json({ success: false, error: err });
         
-        return res.json({ success: true });
+        return res.json({ success: true, first_name:data.first_name, last_name:data.last_name }); 
       });
     }
   })

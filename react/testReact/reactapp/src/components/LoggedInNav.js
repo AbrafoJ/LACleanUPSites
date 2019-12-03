@@ -9,7 +9,9 @@ const LoggedInNav = (props) => {
             <li><NavLink to='/main'>Main</NavLink></li>
             <li><NavLink to='/favorites'>Favorites</NavLink></li>
             <li><a onClick={props.signOut}>Log Out</a></li>
-            <li><NavLink to='/' className='btn btn-floating green lighten-1'>MW</NavLink></li>
+            <li><NavLink to='/' className='btn btn-floating green lighten-1'>
+            {String(props.auth.first_name).toUpperCase().charAt(0)+String(props.auth.last_name).toUpperCase().charAt(0)}
+            </NavLink></li>
         </ul>
     )
 }

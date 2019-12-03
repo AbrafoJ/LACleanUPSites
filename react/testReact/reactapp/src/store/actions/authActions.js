@@ -83,20 +83,24 @@ export const signUp = (newUser) => {
     console.log('authActions signUp newUser: ',newUser)
     return (dispatch, getState) => {
         console.log('authActions getState',getState)
-        const username = newUser['email'];
+        const first_name = newUser['first_name'];
+        const last_name = newUser['last_name'];
+        const username = newUser['email']; //refering to email as username from now on.
         const salt = genRandomString(16);
 
         // change this
         const hashed_psswd = sha512( newUser.password , salt ).passwordHash 
         axios.post('http://localhost:3001/api/putData', {
           id: 0,
+          first_name: first_name,
+          last_name: last_name,
           username: username,
           salt: salt,
           hashed_psswd: hashed_psswd,
         }).then(function(res){
           var status = res.data['success'];
           if(status) {
-            dispatch({ type: 'REG_SUCCESS' }); 
+            dispatch({ type: 'REG_SUCCESS' , first_name:res.data['first_name'], last_name:res.data['last_name'] }); 
           } else {
             dispatch({ type: 'REG_ERROR' });
           }
@@ -134,7 +138,7 @@ export const signIn = (credentials) => {
           }).then(function(res){
             console.log('client side has verified salt',res.data)
             if(res.data.success){
-              dispatch({ type: 'LOGIN_SUCCESS' });
+              dispatch({ type: 'LOGIN_SUCCESS' , first_name:res.data['first_name'], last_name:res.data['last_name'] }); 
             }
             else{
               alert('Invalid username or password.')

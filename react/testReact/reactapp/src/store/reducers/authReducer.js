@@ -16,12 +16,16 @@ const authReducer = (state = initState, action) => {
             return{
                 ...state,
                 auth: true,
+                first_name: action.first_name, 
+                last_name: action.last_name, 
                 authError: null
             }
         case 'REG_SUCCESS':
             return{
                 ...state,
                 auth: true,
+                first_name: action.first_name, 
+                last_name: action.last_name, 
                 authError: null
             }
         case 'REG_ERROR':
