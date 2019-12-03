@@ -68,29 +68,29 @@ router.post('/signIn', (req, res) => {
 });
 
 router.post('/checkHash', (req, res) => {
-    let data = new Data();
-    const { id, user, hashed_psswd } = req.body;
-    
-    Data.findOne({'username': user},'username hashed_psswd first_name last_name',(err,data)=> { 
-      //console.log('HELOL',data.username)
-      if(err) return res.json({success:false,error:err});
-      // return success if hashes match
-      if( !data ) return res.json({success:false,error:err});
-      if(user === data.username && hashed_psswd === data.hashed_psswd){     
-        console.log("server likes the hashes")
-        return res.json({ success: true, first_name:data.first_name, last_name:data.last_name }); 
-      }
-      else{
-        console.log("userhash",hashed_psswd)
-        console.log("serverhash",data.hashed_psswd)
-        console.log("server says hashes dont match")
-        return res.json({success:false,error:err}) 
-      }
-      // }catch(err){
-      //   console.log("post/checkHash",err)
-      //   return res.json({success:false,error:err})
-      // }
-    })
+  let data = new Data();
+  const { id, user, hashed_psswd } = req.body;
+  
+  Data.findOne({'username': user},'username hashed_psswd first_name last_name',(err,data)=> { 
+    //console.log('HELOL',data.username)
+    if(err) return res.json({success:false,error:err});
+    // return success if hashes match
+    if( !data ) return res.json({success:false,error:err});
+    if(user === data.username && hashed_psswd === data.hashed_psswd){     
+      console.log("server likes the hashes")
+      return res.json({ success: true, first_name:data.first_name, last_name:data.last_name }); 
+    }
+    else{
+      console.log("userhash",hashed_psswd)
+      console.log("serverhash",data.hashed_psswd)
+      console.log("server says hashes dont match")
+      return res.json({success:false,error:err}) 
+    }
+    // }catch(err){
+    //   console.log("post/checkHash",err)
+    //   return res.json({success:false,error:err})
+    // }
+  })
 
 });
 

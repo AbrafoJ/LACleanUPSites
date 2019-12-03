@@ -18,6 +18,7 @@ const authReducer = (state = initState, action) => {
                 auth: true,
                 first_name: action.first_name, 
                 last_name: action.last_name, 
+                favs: action.favs,
                 authError: null
             }
         case 'REG_SUCCESS':

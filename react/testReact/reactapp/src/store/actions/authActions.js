@@ -78,6 +78,15 @@ export const deleteFromDB = (idTodelete) => {
 //       update: { message: updateToApply },
 //     });
 //   };
+// var arr_of_favs = []
+// export const getFavorites = (cred) => {
+//   axios.post('http://localhost:4200/favorites' , {
+//     user: cred.username
+//   }).then((res)=>{
+//     console.log("client favorites",res);
+//     arr_of_favs = res;
+//   });
+// }
 
 export const signUp = (newUser) => {
     console.log('authActions signUp newUser: ',newUser)
@@ -100,7 +109,7 @@ export const signUp = (newUser) => {
         }).then(function(res){
           var status = res.data['success'];
           if(status) {
-            dispatch({ type: 'REG_SUCCESS' , first_name:res.data['first_name'], last_name:res.data['last_name'] }); 
+            dispatch({ type: 'REG_SUCCESS' , first_name:res.data['first_name'], last_name:res.data['last_name']}); 
           } else {
             dispatch({ type: 'REG_ERROR' });
           }
@@ -136,9 +145,22 @@ export const signIn = (credentials) => {
             user: credentials.username,
             hashed_psswd: hashed_psswd
           }).then(function(res){
+            var first_name = res.data['first_name'];
+            var last_name = res.data['last_name']
+
             console.log('client side has verified salt',res.data)
             if(res.data.success){
-              dispatch({ type: 'LOGIN_SUCCESS' , first_name:res.data['first_name'], last_name:res.data['last_name'] }); 
+              //var fav_arr = []
+              //================================================================
+              axios.post('http://localhost:4200/favorites' , {
+                user: credentials.username
+              }).then((res)=>{
+                console.log("client favorites",res);
+                //fav_arr = res;
+                dispatch({ type: 'LOGIN_SUCCESS' , first_name, last_name, favs:res.data['favorites'] }); 
+              });
+              //================================================================
+              //dispatch({ type: 'LOGIN_SUCCESS' , first_name:res.data['first_name'], last_name:res.data['last_name'], favs:fav_arr }); 
             }
             else{
               alert('Invalid username or password.')
