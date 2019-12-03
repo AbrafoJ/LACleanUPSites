@@ -49,7 +49,16 @@ router.get('/getUsers', (req, res) => {
 	});
 });
 router.post('/favorites',(req, res) => {
-	var check = req.body.user;//usernamme to check against
+	const { user } = req.body;
+	console.log('server',user);
+	Users.find({'userName': user}, 'userName favorites', function(err, data){
+		if(err) console.log(err);
+		console.log('server2 data', data)
+		res.json(data);
+	});
+});
+router.get('/flo',(req, res) => {
+	var check = 'Flo';//usernamme to check against
 	console.log('server',check);
 	Users.find({'userName': check}, 'userName favorites', function(err, data){
 		if(err) console.log(err);
@@ -57,6 +66,7 @@ router.post('/favorites',(req, res) => {
 		res.json(data);
 	});
 });
+
 
 router.post('/checkHash', (req, res, next) => {
 	console.log('This is not yet implemented');
