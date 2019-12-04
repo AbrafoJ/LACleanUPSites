@@ -52,6 +52,7 @@ class App extends React.Component{
           <NavBar />
           <Switch>
              <Route exact path="/" component={Dashboard} />
+             <Route path="/reload" component={null} key="reload" />
              <Route path="/login" component={LoginPage} />
              <Route path="/main" component={MasterBoard} />
              <Route path="/favorites" component={Favorites} />   

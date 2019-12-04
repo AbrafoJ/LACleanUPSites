@@ -112,17 +112,19 @@ router.post('/putData', (req, res) => {
 	});
 });
 
-router.get('/updateFavorites', (req, res) => {
+router.post('/updateFavorites', (req, res) => {
 	//let user = new Users();
-	//const {username, siteid} = req.body;
-	username = 'Flo';
-	siteid = '123454'
+	const {username, siteid} = req.body;
+	console.log('server username',username)
+	console.log('server siteid',siteid)
+	// username = 'Flo';
+	// siteid = '123454'
 	Users.update({'userName': username}, 
 		{'$push': { 'favorites': siteid} },
 		{'new': true,'upsert': true},
 		function (err, raw){
 			console.log('server updating')
-			if(err) return res.jso({ sucess: false, error: err});
+			if(err) return res.json({ sucess: false, error: err});
 			console.log('Mongo raw error: ', raw);
 		}
 	)

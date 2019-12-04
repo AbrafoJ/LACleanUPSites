@@ -20,6 +20,15 @@ class Favorites extends React.Component{
 		}
 	}
 
+	reload = (props) => {
+		console.log("reload",this.props.location.pathname)
+		//const current = props.location.pathname;
+		this.props.history.replace('/reload');
+		   setTimeout(() => {
+			 this.props.history.replace('/favorites');
+		   });
+	   }
+
 	componentDidMount(){
 		try{
 			console.log('get fav of user',this.props.auth.favs[0].userName)
@@ -47,61 +56,18 @@ class Favorites extends React.Component{
 					if(fav_id === obj_id){
 						console.log("got it ",obj_id)
 
-						console.log('this is the listing',all_sites[i])
+						console.log('favorites, got the fav listing  from db',all_sites[i])
 						
 						var temp = all_sites[i];
-
-						//var IDk = Object.assign(temp, returnedobj);
-						//console.log('IDK', IDk);
-						//console.log("temp",temp)
-						//returnedobj = Object.assign(temp,returnedobj);
 						objArr.push(temp)
 					}
 				}
 			}
 			console.log('objaray',objArr)
-			//console.log("THIS IS MY JSONLIST",returnedobj)
-
-			
-
 			this.setState({data: objArr})
-
-			// console.log('gfsgfd',all_sites[0])
-
-
-			// for (let obj in all_sites) {
-			// 	console.log('obj',obj[1]._id)
-		
-			// 	for (var id in this.props.auth.favs[0].favorites){
-			// 		if (id === obj['_id']){
-			// 			console.log('ids',id);
-			// 		}
-			// 	}
-			// }
 		}).catch((e) => {
 			console.log(e)
 		});
-
-		
-
-
-
-
-
-
-
-		// // this link will be replaced with our data
-		// const url = "https://jsonplaceholder.typicode.com/posts";
-		// fetch(url, {
-		//   method: "GET"
-		// }).then(response => {
-		//   return response.json();
-		// })
-		// .then(data => {
-		//   this.setState({data: data})
-		//   //console.log(this.state.data)
-		  
-		// });
 	}
 
 	render() {
@@ -113,6 +79,17 @@ class Favorites extends React.Component{
 				<ReactTable
 					data={data}
 					columns = {[
+
+						{
+							Header:"",
+							accessor:"_id",
+							style:{
+							  textAlign:"center"
+							},
+							width: 100,
+							maxWidth: 100,
+							minWidth: 100,
+						  },
 						//=====================================================
 						//=====================================================
 						{
@@ -121,7 +98,7 @@ class Favorites extends React.Component{
 									//-----------------------------------------
 									{
 									Header: "Street #",
-									accessor: "Street #",
+									accessor: "Street_Num",
 									style:{
 									textAlign: "center"
 									},
@@ -133,7 +110,7 @@ class Favorites extends React.Component{
 								//-----------------------------------------
 									{
 										Header: "Street Name",
-										accessor: "Street Name",
+										accessor: "Street_Name",
 										style:{
 										textAlign: "center"
 										},
@@ -145,7 +122,7 @@ class Favorites extends React.Component{
 								//-----------------------------------------
 									{
 										Header: "ZIP Code",
-										accessor: "ZIP Code",
+										accessor: "ZIP_Code",
 										style:{
 										textAlign: "center"
 										},
@@ -165,7 +142,7 @@ class Favorites extends React.Component{
 									{
 									//-----------------------------------------
 									Header: "Sale Price",
-									accessor: "title",
+									accessor: "Sale_Price",
 									sortable: true,
 									filterable: true,
 									width: 150,

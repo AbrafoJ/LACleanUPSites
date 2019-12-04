@@ -35,7 +35,8 @@ var userModel = mongoose.model('userModel', userSchema);
 var testUserInstance = new userModel({
 	userName: 'Flo',
 	passwordHash: 'hardcarry',
-	favorites:['5de6f5e0dbfbe94534d9c21c','5de6f5e0dbfbe94534d9c225'],
+	favorites:['5de716533a5e0547e658b756'],
+	//favorites:['5de6f5e0dbfbe94534d9c21c','5de6f5e0dbfbe94534d9c225'],
 	deleted: []
 });
 

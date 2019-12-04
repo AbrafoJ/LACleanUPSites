@@ -7,6 +7,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 
 
+
 // ReactTable
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -102,6 +103,15 @@ class MasterBoard extends React.Component{
     }
   }
 
+	reload = (props) => {
+		console.log("reload",this.props.location.pathname)
+		//const current = props.location.pathname;
+		this.props.history.replace('/reload');
+		   setTimeout(() => {
+			 this.props.history.replace('/');
+		   });
+	   }
+
   //----------------------------------------------------------------------
   // bookMarkRow() 
   // input: takes an id to the array corresponding to a row
@@ -110,12 +120,10 @@ class MasterBoard extends React.Component{
   // post-cond: address is saved in user's database, not master database
   //----------------------------------------------------------------------
   bookmarkRow(id){
-    // const index = this.state.data.findIndex(_data => {
-    //   return _data.Address_ID === id; //WE DONT HAVE AN ID RIGHT NOW, WAIT FOR JOSEPHS LIST OR W/E
-    // })
-    // console.log(index)
     var userName = this.props.auth.favs[0].userName;
-    var siteId = this.props.auth.favs[0]._id;
+    var siteId = this.state.data[id];
+    console.log('masterboard id', id)
+    //var siteId = this.props.auth.favs[0]._id;
     console.log('masterboard props',this.props.auth )
     console.log('masterboard id' ,siteId);
     console.log('masterboard user',userName);
@@ -125,7 +133,14 @@ class MasterBoard extends React.Component{
 
     })
     .then((res) => {
+      //this.reload()
+
+      this.setState(prevState => ({
+        data: [...prevState.data]
+     }))
       console.log('response',res)
+    }).catch((e) => {
+      console.log("masterboard bookmarkRow error", e)
     })
     // once delete button is clicked, remove from table
     //this.state.data.splice(index, 1);
