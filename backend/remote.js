@@ -112,11 +112,12 @@ router.post('/putData', (req, res) => {
 	});
 });
 
-router.post('/updateFavorites', (req, res) => {
-	let user = new Users();
-	const {username, siteid} = req.body;
-	
-	user.update({'userName': username}, 
+router.get('/updateFavorites', (req, res) => {
+	//let user = new Users();
+	//const {username, siteid} = req.body;
+	username = 'Flo';
+	siteid = '123454'
+	Users.update({'userName': username}, 
 		{'$push': { 'favorites': siteid} },
 		{'new': true,'upsert': true},
 		function (err, raw){
