@@ -21,7 +21,7 @@ class Favorites extends React.Component{
 	}
 
 	reload = (props) => {
-		console.log("reload",this.props.location.pathname)
+		console.log("reload CALLED")
 		//const current = props.location.pathname;
 		this.props.history.replace('/reload');
 		   setTimeout(() => {
@@ -29,22 +29,34 @@ class Favorites extends React.Component{
 		   });
 	   }
 
+	handleClick(event){
+		//event.preventDefault();
+		console.log("DJSKLADJKLASKLJKLSDJJAKLSDJSAKI GOT CLICKED")
+	}
+
+	toggleShowProjects = () => {
+		console.log("toggle")
+		this.setState(prevState => ({
+		  data: !prevState.data
+		}))
+	  }
+
 	componentDidMount(){
-		try{
-			console.log('get fav of user',this.props.auth.favs[0].userName)
-			console.log('user favs',this.props.auth.favs[0].favorites)
-		  }
-		catch(e){
-			console.log("error",e)
-		}
+		// try{
+		// 	console.log('get fav of user',this.props.auth.favs[0].userName)
+		// 	console.log('user favs',this.props.auth.favs[0].favorites)
+		//   }
+		// catch(e){
+		// 	console.log("error",e)
+		// }
 
 		axios.get('http://localhost:4200/getSites')
 		.then((res) => {
-			console.log('fav success',res.data)
-			console.log('fav props.auth.favs',this.props.auth.favs[0].favorites)
+			// console.log('fav success',res.data)
+			// console.log('fav props.auth.favs',this.props.auth.favs[0].favorites)
 			var fav_arr = this.props.auth.favs[0].favorites;
 			var all_sites = res.data;
-			var returnedobj = {};
+
 			var objArr = []
 			for (var i in all_sites){
 				var obj = all_sites[i]
@@ -54,16 +66,16 @@ class Favorites extends React.Component{
 					var fav_id = fav_arr[j]
 					//console.log("inside id",fav_id)
 					if(fav_id === obj_id){
-						console.log("got it ",obj_id)
+						//console.log("got it ",obj_id)
 
-						console.log('favorites, got the fav listing  from db',all_sites[i])
+						//console.log('favorites, got the fav listing  from db',all_sites[i])
 						
 						var temp = all_sites[i];
 						objArr.push(temp)
 					}
 				}
 			}
-			console.log('objaray',objArr)
+			//console.log('objaray',objArr)
 			this.setState({data: objArr})
 		}).catch((e) => {
 			console.log(e)
@@ -71,7 +83,7 @@ class Favorites extends React.Component{
 	}
 
 	render() {
-		console.log('THIS IS THE FAVORITES',this.state)
+		//console.log('THIS IS THE FAVORITES',this.state)
 		const { data } = this.state; 
 		return (
 			<div>

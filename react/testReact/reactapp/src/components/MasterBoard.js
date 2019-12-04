@@ -122,22 +122,21 @@ class MasterBoard extends React.Component{
   bookmarkRow(id){
     var userName = this.props.auth.favs[0].userName;
     var siteId = this.state.data[id];
-    console.log('masterboard id', id)
+    //console.log('masterboard id', id)
     //var siteId = this.props.auth.favs[0]._id;
-    console.log('masterboard props',this.props.auth )
-    console.log('masterboard id' ,siteId);
-    console.log('masterboard user',userName);
+    //console.log('masterboard props',this.props.auth )
+    //console.log('masterboard id' ,siteId);
+    //console.log('masterboard user',userName);
     axios.post('http://localhost:4200/updateFavorites' , {
       username: userName,
       siteid: siteId
-
     })
     .then((res) => {
       //this.reload()
 
-      this.setState(prevState => ({
-        data: [...prevState.data]
-     }))
+    //   this.setState(prevState => ({
+    //     data: [...prevState.reload]
+    //  }))
       console.log('response',res)
     }).catch((e) => {
       console.log("masterboard bookmarkRow error", e)
@@ -155,7 +154,7 @@ class MasterBoard extends React.Component{
   // accessor is the key to each object
   //----------------------------------------------------------------------
   render(){
-    console.log("MASTERBOARD" , this.state)
+    //console.log("MASTERBOARD" , this.state)
     const {data} = this.state; 
     
     return (

@@ -122,7 +122,7 @@ export const signUp = (newUser) => {
 
 export const signIn = (credentials) => {
     return (dispatch, getState) => {
-        console.log('authActions signIn credentials',credentials)
+        //console.log('authActions signIn credentials',credentials)
         // credentials = {username: "", password"""}
         //console.log('I AM HERE',credentials)
         // fetch('http://localhost:3001/api/getData')
@@ -137,7 +137,7 @@ export const signIn = (credentials) => {
         }).then((res)=>{
           // i got back salt, hash it, send it back to server
           // with the username (server compares it with its username in mongo)
-          console.log("I GOT SALT",res.data)
+          //console.log("I GOT SALT",res.data)
           var hashed_psswd = sha512(credentials.password,res.data).passwordHash 
 
           axios.post('http://localhost:3001/api/checkHash', {
@@ -148,14 +148,14 @@ export const signIn = (credentials) => {
             var first_name = res.data['first_name'];
             var last_name = res.data['last_name']
 
-            console.log('client side has verified salt',res.data)
+            //console.log('client side has verified salt',res.data)
             if(res.data.success){
               //var fav_arr = []
               //================================================================
               axios.post('http://localhost:4200/favorites' , {
                 user: credentials.username
               }).then((res)=>{
-                console.log("client favorites",res);
+                //console.log("client favorites",res);
                 //fav_arr = res;
                 dispatch({ type: 'LOGIN_SUCCESS' , first_name, last_name, favs:res.data['favorites'] }); 
               });
