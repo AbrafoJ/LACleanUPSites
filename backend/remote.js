@@ -14,7 +14,7 @@ app.use(cors());
 const router = express.Router();
 
 //this is our mongodb database
-const dbRoute = 'mongodb://127.0.0.1/KnownSites';
+const dbRoute = 'mongodb://127.0.0.1/lacleanup';
 
 mongoose.connect(dbRoute, { useNewUrlParser: true, useUnifiedTopology: true});
 

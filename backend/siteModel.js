@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb://127.0.0.1/sites';
+var mongoDB = 'mongodb://127.0.0.1/lacleanup';
 mongoose.connect(mongoDB, { useNewUrlParser: true});
 
 var db = mongoose.connection;
