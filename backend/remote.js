@@ -113,7 +113,6 @@ router.post('/putData', (req, res) => {
 });
 
 router.post('/updateFavorites', (req, res) => {
-	//let user = new Users();
 	const {username, siteid} = req.body;
 	console.log('server username',username)
 	console.log('server siteid',siteid)
@@ -125,7 +124,25 @@ router.post('/updateFavorites', (req, res) => {
 		function (err, raw){
 			console.log('server updating')
 			if(err) return res.json({ sucess: false, error: err});
-			console.log('Mongo raw error: ', raw);
+			console.log('Mongo raw output: ', raw);
+		}
+	)
+	return res.json({ success: true }); 
+});
+
+router.post('/deleteFavorites', (req, res) => {
+	
+	const {username, siteid} = req.body;
+	console.log('server username',username)
+	console.log('server siteid',siteid)
+	
+	Users.update({'userName': username}, 
+		{'$pull': { 'favorites': siteid} },
+		{'new': true},
+		function (err, raw){
+			console.log('server removing:', siteid)
+			if(err) return res.json({ sucess: false, error: err});
+			console.log('Mongo raw output: ', raw);
 		}
 	)
 	return res.json({ success: true }); 
