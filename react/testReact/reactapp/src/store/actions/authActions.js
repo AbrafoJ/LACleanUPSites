@@ -34,6 +34,7 @@ export const sha512 = function(password, salt){
 let currentIds = 0;
 var data = []
 // ------------------------------------------------------------------------------
+//export const path = 
 export const getDataFromDb = () => {
     fetch('http://localhost:3001/api/getData')
       .then(function(data){

@@ -43,7 +43,7 @@ class MasterBoard extends React.Component{
   // fetch data from database and store it into component
   //----------------------------------------------------------------------
   getData(){
-      fetch('http://localhost:4200/getSites',{
+      fetch(path +'/getSites',{
         method: "GET"
       })
       .then(response => {

@@ -9,7 +9,7 @@ var jsonFile = require('./merged_data.json');
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-  var dbo = db.db("KnownSites");
+  var dbo = db.db("lacleanup");
   //var siteobj = [
     	//{id: '1', address: '2020,BLOOMFIELD AVE 90703'},
 
