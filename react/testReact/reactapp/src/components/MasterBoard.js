@@ -42,7 +42,7 @@ class MasterBoard extends React.Component{
   // fetch data from database and store it into component
   //----------------------------------------------------------------------
   getData(){
-      fetch(path + '/getSites',{
+      fetch('http://localhost:4200/getSites',{
         method: "GET"
       })
       .then(response => {
@@ -170,7 +170,7 @@ class MasterBoard extends React.Component{
                               //-----------------------------------------
                               {
                               Header: "Street Number",
-                              accessor: "Street #",
+                              accessor: "Street_Num",
                               style:{
                                 textAlign: "center"
                               },
@@ -182,7 +182,7 @@ class MasterBoard extends React.Component{
                             //-----------------------------------------
                             {
                               Header: "Street Name",
-                              accessor: "Street Name",
+                              accessor: "Street_Name",
                               style:{
                                 textAlign: "center"
                               },
@@ -194,7 +194,7 @@ class MasterBoard extends React.Component{
                             //-----------------------------------------
                             {
                               Header: "ZIP Code",
-                              accessor: "ZIP Code",
+                              accessor: "ZIP_Code",
                               style:{
                                 textAlign: "center"
                               },

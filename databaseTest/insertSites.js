@@ -3,7 +3,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 var fs = require('fs');
-var jsonFile = require('./jsonSites.json');
+var jsonFile = require('./merged_data.json');
 //const jsonFP = 'jsonSites.json'
 //var jsonObj = JSON.parse(jsonFP);
 
