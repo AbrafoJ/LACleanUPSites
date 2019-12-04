@@ -114,16 +114,18 @@ router.post('/putData', (req, res) => {
 
 router.post('/updateFavorites', (req, res) => {
 	let user = new Users();
-	const {username, newFavorite} = req.body;
+	const {username, siteid} = req.body;
 	
 	user.update({'userName': username}, 
-		{'$push': { 'favorites': newFavorite} },
+		{'$push': { 'favorites': siteid} },
 		{'new': true,'upsert': true},
 		function (err, raw){
+			console.log('server updating')
 			if(err) return res.jso({ sucess: false, error: err});
 			console.log('Mongo raw error: ', raw);
 		}
 	)
+	return res.json({ success: true }); 
 });
 //,api parameter removed
 app.use( router);

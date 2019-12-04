@@ -3,6 +3,9 @@
 //=======================================================================
 // React
 import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux'
+
 
 // ReactTable
 import ReactTable from "react-table";
@@ -107,10 +110,23 @@ class MasterBoard extends React.Component{
   // post-cond: address is saved in user's database, not master database
   //----------------------------------------------------------------------
   bookmarkRow(id){
-    const index = this.state.data.findIndex(_data => {
-      return _data.Address_ID === id; //WE DONT HAVE AN ID RIGHT NOW, WAIT FOR JOSEPHS LIST OR W/E
+    // const index = this.state.data.findIndex(_data => {
+    //   return _data.Address_ID === id; //WE DONT HAVE AN ID RIGHT NOW, WAIT FOR JOSEPHS LIST OR W/E
+    // })
+    // console.log(index)
+    var userName = this.props.auth.favs[0].userName;
+    var siteId = this.props.auth.favs[0]._id;
+    console.log('masterboard props',this.props.auth )
+    console.log('masterboard id' ,siteId);
+    console.log('masterboard user',userName);
+    axios.post('http://localhost:4200/updateFavorites' , {
+      username: userName,
+      siteid: siteId
+
     })
-    console.log(index)
+    .then((res) => {
+      console.log('response',res)
+    })
     // once delete button is clicked, remove from table
     //this.state.data.splice(index, 1);
     //this.setState({data: this.state.data});
@@ -124,7 +140,9 @@ class MasterBoard extends React.Component{
   // accessor is the key to each object
   //----------------------------------------------------------------------
   render(){
+    console.log("MASTERBOARD" , this.state)
     const {data} = this.state; 
+    
     return (
       <div>
         <div className='masterBoard' style={{margin:'auto'}}>
@@ -137,7 +155,7 @@ class MasterBoard extends React.Component{
 
                   {
                     Header:"",
-                    accessor:"Address_ID",
+                    accessor:"_id",
                     style:{
                       textAlign:"center"
                     },
@@ -152,7 +170,7 @@ class MasterBoard extends React.Component{
                               //-----------------------------------------
                               {
                               Header: "Street Number",
-                              accessor: "Street_Num",
+                              accessor: "Street #",
                               style:{
                                 textAlign: "center"
                               },
@@ -164,7 +182,7 @@ class MasterBoard extends React.Component{
                             //-----------------------------------------
                             {
                               Header: "Street Name",
-                              accessor: "Street_Name",
+                              accessor: "Street Name",
                               style:{
                                 textAlign: "center"
                               },
@@ -176,7 +194,7 @@ class MasterBoard extends React.Component{
                             //-----------------------------------------
                             {
                               Header: "ZIP Code",
-                              accessor: "ZIP_Code",
+                              accessor: "ZIP Code",
                               style:{
                                 textAlign: "center"
                               },
@@ -247,7 +265,7 @@ class MasterBoard extends React.Component{
                                     >Save</button>
                                   )
                                 }
-                              }
+                                }
                               //-----------------------------------------
                             ],
                   }
@@ -268,4 +286,11 @@ class MasterBoard extends React.Component{
   }
 }
 
-export default MasterBoard;
+const mapStateToProps = (state) => {
+	console.log('MasterBoard.js mapStatetoProps hi',state);
+	return {
+		auth: state.auth
+	}
+}
+
+export default connect(mapStateToProps)(MasterBoard);
