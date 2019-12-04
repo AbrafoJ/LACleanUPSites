@@ -23,7 +23,7 @@ class Loginscreen extends Component {
     if(this.state.isLogin){
       var loginscreen=[];
       loginscreen.push(<Register parentContext={this}/>);
-      loginmessage = "loginscreen.js Already registered. Go to Login";
+      loginmessage = "";
       this.setState({
                      loginscreen:loginscreen,
                      loginmessage:loginmessage,
