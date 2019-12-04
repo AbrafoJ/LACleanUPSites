@@ -21,7 +21,7 @@ import './Dashboard.css';
 //=======================================================================
 
 //const path = "http://ec2-52-33-84-204.us-west-2.compute.amazonaws.com:4200";
-const path = "http://44.227.157.207:4200"; // to MongoDB
+const path = "http://localhost:4200"; // to MongoDB
 
 //**********************************************************************/
 // APP CLASS

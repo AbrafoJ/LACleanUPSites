@@ -126,7 +126,7 @@ router.post('/putData', (req, res) => {
   console.log('last_name', last_name)
   console.log('username',username)
   console.log('hashed_psswd',hashed_psswd)
-  user.findOne({username}, function(err, obj){
+  User.findOne({username}, function(err, obj){
     if(err) console.log(err);
     //data exists; send back error
     if(obj){
