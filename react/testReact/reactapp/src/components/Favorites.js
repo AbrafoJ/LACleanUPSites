@@ -34,13 +34,6 @@ class Favorites extends React.Component{
 		console.log("DJSKLADJKLASKLJKLSDJJAKLSDJSAKI GOT CLICKED")
 	}
 
-	toggleShowProjects = () => {
-		console.log("toggle")
-		this.setState(prevState => ({
-		  data: !prevState.data
-		}))
-	  }
-
 	componentDidMount(){
 		// try{
 		// 	console.log('get fav of user',this.props.auth.favs[0].userName)
